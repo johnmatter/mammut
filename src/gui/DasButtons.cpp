@@ -53,49 +53,49 @@ DasButtons::DasButtons ()
     addAndMakeVisible(gc);
 
     gc->addAndMakeVisible (textButton1 = new TextButton ("Play"));
-    textButton1->addButtonListener (this);
+    textButton1->addListener (this);
     textButton1->setColour (TextButton::buttonColourId, Colour (0xffbbbbff));
     textButton1->setColour (TextButton::buttonOnColourId, Colour (0xff4444ff));
-    textButton1->setColour (TextButton::textColourId, Colours::black);
+    textButton1->setColour (TextButton::textColourOffId, Colours::black);
 
     gc->addAndMakeVisible (textButton4 = new TextButton ("Play"));
     textButton4->setButtonText ("<");
-    textButton4->addButtonListener (this);
+    textButton4->addListener (this);
     textButton4->setColour (TextButton::buttonColourId, Colour (0xffbbbbff));
     textButton4->setColour (TextButton::buttonOnColourId, Colour (0xff4444ff));
-    textButton4->setColour (TextButton::textColourId, Colours::black);
+    textButton4->setColour (TextButton::textColourOffId, Colours::black);
 
     gc->addAndMakeVisible (textButton2 = new TextButton ("Play"));
     textButton2->setButtonText ("Stop");
-    textButton2->addButtonListener (this);
+    textButton2->addListener (this);
     textButton2->setColour (TextButton::buttonColourId, Colour (0xffbbbbff));
     textButton2->setColour (TextButton::buttonOnColourId, Colour (0xff4444ff));
-    textButton2->setColour (TextButton::textColourId, Colours::black);
+    textButton2->setColour (TextButton::textColourOffId, Colours::black);
 
     gc->addAndMakeVisible (textButton5 = new TextButton ("Play"));
     textButton5->setButtonText (">");
-    textButton5->addButtonListener (this);
+    textButton5->addListener (this);
     textButton5->setColour (TextButton::buttonColourId, Colour (0xffbbbbff));
     textButton5->setColour (TextButton::buttonOnColourId, Colour (0xff4444ff));
-    textButton5->setColour (TextButton::textColourId, Colours::black);
+    textButton5->setColour (TextButton::textColourOffId, Colours::black);
 
     gc->addAndMakeVisible (textButton6 = new TextButton ("Play"));
     textButton6->setButtonText ("Undo");
-    textButton6->addButtonListener (this);
+    textButton6->addListener (this);
     textButton6->setColour (TextButton::buttonColourId, Colour (0xffbbbbff));
     textButton6->setColour (TextButton::buttonOnColourId, Colour (0xff4444ff));
-    textButton6->setColour (TextButton::textColourId, Colours::black);
+    textButton6->setColour (TextButton::textColourOffId, Colours::black);
 
     gc->addAndMakeVisible (textButton7 = new TextButton ("Play"));
     textButton7->setButtonText ("Redo");
-    textButton7->addButtonListener (this);
+    textButton7->addListener (this);
     textButton7->setColour (TextButton::buttonColourId, Colour (0xffbbbbff));
     textButton7->setColour (TextButton::buttonOnColourId, Colour (0xff4444ff));
-    textButton7->setColour (TextButton::textColourId, Colours::black);
+    textButton7->setColour (TextButton::textColourOffId, Colours::black);
 
     gc->addAndMakeVisible (toggleButton3 = new ToggleButton ("new toggle button"));
     toggleButton3->setButtonText ("Zoom");
-    toggleButton3->addButtonListener (this);
+    toggleButton3->addListener (this);
 
     gc->addAndMakeVisible (slider = new Slider ("new slider"));
     slider->setRange (0, 100, 0);
@@ -114,14 +114,14 @@ DasButtons::~DasButtons()
     //[Destructor_pre]. You can add your own custom destruction code here..
     //[/Destructor_pre]
 
-    deleteAndZero (textButton1);
-    deleteAndZero (textButton4);
-    deleteAndZero (textButton2);
-    deleteAndZero (textButton5);
-    deleteAndZero (textButton6);
-    deleteAndZero (textButton7);
-    deleteAndZero (toggleButton3);
-    deleteAndZero (slider);
+    delete (textButton1);
+    delete (textButton4);
+    delete (textButton2);
+    delete (textButton5);
+    delete (textButton6);
+    delete (textButton7);
+    delete (toggleButton3);
+    delete (slider);
 
     //[Destructor]. You can add your own custom destruction code here..
     //[/Destructor]

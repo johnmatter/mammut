@@ -46,8 +46,8 @@
                                                                     //[/Comments]
 */
 class DasButtons  : 
-  public ButtonListener,
-  public SliderListener,
+  public Button::Listener,
+  public Slider::Listener,
   public Component
 				
 {
@@ -67,7 +67,7 @@ public:
 
 
     //==============================================================================
-    juce_UseDebuggingNewOperator
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DasButtons)
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
@@ -84,10 +84,7 @@ private:
     ToggleButton* toggleButton3;
     Slider* slider;
 
-    //==============================================================================
-    // (prevent copy constructor and operator= being generated..)
-    DasButtons (const DasButtons&);
-    const DasButtons& operator= (const DasButtons&);
+
 };
 
 

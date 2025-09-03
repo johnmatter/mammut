@@ -33,103 +33,22 @@ pkg_check_modules(REQUIRED REQUIRED vorbis vorbisfile sndfile samplerate)
 # Add JUCE as a subdirectory
 add_subdirectory(juce)
 
-# Source files
-set(SOURCES
-  src/globals.c
-  src/load.c
-  src/fft.c
-  src/analysett.c
-  src/save.c
-  src/phaseswap.c
-  src/crossover.c
-  src/loadmult.c
-  src/undo.c
-  src/jackplay.c
-  src/c_interface.c
-  src/ApplicationStartup.cpp
-  src/MainAppWindow.cpp
-  src/Interface.cpp
-  src/gui.cpp
-  src/Stretch.cpp
-  src/Wobble.cpp
-  src/MultiplyPhase.cpp
-  src/DerivativeAmp.cpp
-  src/Filter.cpp
-  src/Invert.cpp
-  src/Threshold.cpp
-  src/SpectrumShift.cpp
-  src/AmplitudeToPhase.cpp
-  src/Gain.cpp
-  src/CombSplit.cpp
-  src/SplitRealImag.cpp
-  src/KeepPeaks.cpp
-  src/BlockSwap.cpp
-  src/Mirror.cpp
-  src/Stereo.cpp
-  src/juceplay.cpp
-  src/tempfile.cpp
-  src/Progressbar.cpp
-  src/Zoom.cpp
-  src/oggsoundholder.cpp
-  src/Prefs.cpp
-  src/error.cpp
-  src/PictureHolder.cpp
-  src/transform/t_stretch.c
-  src/transform/t_wobble.c
-  src/transform/t_sshift.c
-  src/transform/t_phadd.c
-  src/transform/t_pderiv.c
-  src/transform/t_filter.c
-  src/transform/t_invert.c
-  src/transform/t_threshold.c
-  src/transform/t_peaks.c
-  src/transform/t_blockmov.c
-  src/transform/t_gain.c
-  src/transform/t_combsplit.c
-  src/transform/t_reimsplit.c
-  src/transform/t_mirror.c
-  src/transform/t_ampphas.c
+# Source files - use wildcards for automatic discovery
+file(GLOB_RECURSE SOURCES 
+  src/*.cpp
+  src/*.c
 )
 
-# Header files
-set(HEADERS
-  src/mammut.h
-  src/transformheader.h
-  src/transform/mammut.h
-  src/MainHeader.h
-  src/GraphComponent.h
-  src/MainAppWindow.h
-  src/Interface.h
-  src/PictureHolder.h
-  src/Prefs.h
-  src/Stretch.h
-  src/Wobble.h
-  src/MultiplyPhase.h
-  src/DerivativeAmp.h
-  src/Filter.h
-  src/Invert.h
-  src/Threshold.h
-  src/SpectrumShift.h
-  src/AmplitudeToPhase.h
-  src/Gain.h
-  src/CombSplit.h
-  src/SplitRealImag.h
-  src/KeepPeaks.h
-  src/BlockSwap.h
-  src/Mirror.h
-  src/Stereo.h
-  src/juceplay.h
-  src/tempfile.h
-  src/undo.h
-  src/jackplay.h
-  src/oggsoundholder.h
-  src/AppSettings.h
-  src/DasButtons.h
-  src/DasTabbedComponent.h
-  src/gui.h
-  src/mysndfile.h
-  src/Zoom.h
+# Exclude build directory files
+list(FILTER SOURCES EXCLUDE REGEX ".*build.*")
+
+# Header files - use wildcards for automatic discovery
+file(GLOB_RECURSE HEADERS 
+  src/*.h
 )
+
+# Exclude build directory files
+list(FILTER HEADERS EXCLUDE REGEX ".*build.*")
 
 # Create executable
 add_executable(mammut ${SOURCES} ${HEADERS})
@@ -154,9 +73,15 @@ target_compile_definitions(mammut PRIVATE
   MAMMUT_VERSION="${PROJECT_VERSION}"
 )
 
-# Include directories
+# Include directories - use absolute paths
 target_include_directories(mammut PRIVATE
   ${CMAKE_CURRENT_SOURCE_DIR}/src
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/c_core
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/core
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/core/utils
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/gui
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/audio
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/transforms
   ${REQUIRED_INCLUDE_DIRS}
 )
 
