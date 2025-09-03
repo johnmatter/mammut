@@ -30,7 +30,7 @@ endif()
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(REQUIRED REQUIRED vorbis vorbisfile sndfile samplerate)
 
-# JUCE setup
+# Add JUCE as a subdirectory
 add_subdirectory(juce)
 
 # Source files
@@ -134,6 +134,19 @@ set(HEADERS
 # Create executable
 add_executable(mammut ${SOURCES} ${HEADERS})
 
+# Set target properties for macOS bundle
+if(APPLE)
+  set_target_properties(mammut PROPERTIES
+    MACOSX_BUNDLE TRUE
+    MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_SOURCE_DIR}/macosx/Info.plist"
+    MACOSX_BUNDLE_BUNDLE_NAME "Mammut"
+    MACOSX_BUNDLE_BUNDLE_VERSION "${PROJECT_VERSION}"
+    MACOSX_BUNDLE_SHORT_VERSION_STRING "${PROJECT_VERSION}"
+    MACOSX_BUNDLE_GUI_IDENTIFIER "com.mammut.audio"
+    MACOSX_BUNDLE_ICON_FILE "icon.icns"
+  )
+endif()
+
 # Set target properties
 target_compile_definitions(mammut PRIVATE
   FOR_MACOSX
@@ -172,22 +185,16 @@ target_compile_options(mammut PRIVATE
   $<$<CXX_COMPILER_ID:Clang>:-Wall -Wextra -Wno-deprecated-declarations -Wno-unused-parameter>
 )
 
-# Install target
-install(TARGETS mammut
-  RUNTIME DESTINATION bin
-  BUNDLE DESTINATION Applications
-)
+# Copy resources to build directory for macOS bundle
+if(APPLE)
+  add_custom_command(TARGET mammut POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+      "${CMAKE_CURRENT_SOURCE_DIR}/doc"
+      "$<TARGET_BUNDLE_DIR:mammut>/Contents/Resources/doc"
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+      "${CMAKE_CURRENT_SOURCE_DIR}/icons"
+      "$<TARGET_BUNDLE_DIR:mammut>/Contents/Resources/icons"
+    COMMENT "Copying resources to macOS bundle"
+  )
+endif()
 
-# Copy resources
-install(FILES
-  doc/mammuthelp.html
-  NEW
-  DESTINATION share/mammut
-)
-
-# Copy icons
-install(FILES
-  icons/icon.ico
-  icons/icon.png
-  DESTINATION share/mammut/icons
-)
