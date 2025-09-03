@@ -89,8 +89,7 @@ void rfft(float x[], int N, int forward)
    recursive Fast Fourier transform method due to Danielson
    and Lanczos.  NC MUST be a power of 2. */
 
-static void cfft( x, NC, forward )
-float x[]; int NC, forward;
+static void cfft(float x[], int NC, int forward)
 {
   float 	wr,wi,
 		wpr,wpi,
