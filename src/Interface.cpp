@@ -676,21 +676,35 @@ void Interface::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == loadbrowse)
     {
         //[UserButtonCode_loadbrowse] -- add your button handler code here..
+      printf("DEBUG: loadbrowse button clicked!\n");
+      
       isprocessing=true;
-      FileChooser myChooser ("Please choose file to load and analyze...",
-			     File(),
-			     String());
+      printf("DEBUG: Creating FileChooser...\n");
+      
+      // Use member variable to keep FileChooser alive during async operation
+      loadFileChooser = std::make_unique<FileChooser>("Please choose file to load and analyze...",
+			     File::getSpecialLocation(File::userHomeDirectory),
+			     "*.wav;*.aiff;*.flac;*.ogg;*.mp3");
 
-      myChooser.launchAsync(FileBrowserComponent::openMode | FileBrowserComponent::canSelectFiles,
+      printf("DEBUG: About to launch FileChooser...\n");
+      
+      // Use launchAsync with the member variable
+      loadFileChooser->launchAsync(FileBrowserComponent::openMode | FileBrowserComponent::canSelectFiles,
         [this](const FileChooser& chooser) {
+          printf("DEBUG: FileChooser callback executed!\n");
           if (chooser.getResult() != File{}) {
             File mooseFile = chooser.getResult();
             filename = (char*)mooseFile.getFullPathName().toRawUTF8();
             printf("Filename2: %s\n", filename);
             loadcomboBox->setText(mooseFile.getFullPathName());
+          } else {
+            printf("DEBUG: No file selected\n");
           }
           isprocessing = false;
+          // Clear the FileChooser after use
+          loadFileChooser.reset();
         });
+      printf("DEBUG: FileChooser launchAsync called\n");
 
         //[/UserButtonCode_loadbrowse]
     }
@@ -700,11 +714,14 @@ void Interface::buttonClicked (Button* buttonThatWasClicked)
       if(savebutton->isEnabled()==false)
 	return;
       isprocessing=true;
-      FileChooser myChooser ("Please choose file to load and multiply...",
-			     File(),
-			     String());
+      
+      // Use member variable to keep FileChooser alive during async operation
+      loadMulFileChooser = std::make_unique<FileChooser>("Please choose file to load and multiply...",
+			     File::getSpecialLocation(File::userHomeDirectory),
+			     "*.wav;*.aiff;*.flac;*.ogg;*.mp3");
 
-      myChooser.launchAsync(FileBrowserComponent::openMode | FileBrowserComponent::canSelectFiles,
+      // Use launchAsync with the member variable
+      loadMulFileChooser->launchAsync(FileBrowserComponent::openMode | FileBrowserComponent::canSelectFiles,
         [this](const FileChooser& chooser) {
           if (chooser.getResult() != File{}) {
             File mooseFile = chooser.getResult();
@@ -713,6 +730,8 @@ void Interface::buttonClicked (Button* buttonThatWasClicked)
             loadmulcomboBox->setText(mooseFile.getFullPathName());
           }
           isprocessing = false;
+          // Clear the FileChooser after use
+          loadMulFileChooser.reset();
         });
         //[/UserButtonCode_loadmulbrowse]
     }
@@ -764,11 +783,13 @@ void Interface::buttonClicked (Button* buttonThatWasClicked)
     {
         //[UserButtonCode_saveasbutton] -- add your button handler code here..
       isprocessing=true;
-      FileChooser myChooser ("Please choose file to save...",
-			     File(),
-			     String());
+      
+      // Use member variable to keep FileChooser alive during async operation
+      saveFileChooser = std::make_unique<FileChooser>("Please choose file to save...",
+			     File::getSpecialLocation(File::userHomeDirectory),
+			     "*.wav;*.aiff;*.flac;*.ogg;*.mp3");
 
-      myChooser.launchAsync(FileBrowserComponent::saveMode | FileBrowserComponent::canSelectFiles,
+      saveFileChooser->launchAsync(FileBrowserComponent::saveMode | FileBrowserComponent::canSelectFiles,
         [this](const FileChooser& chooser) {
           if (chooser.getResult() != File{}) {
             File mooseFile = chooser.getResult();
@@ -791,6 +812,8 @@ void Interface::buttonClicked (Button* buttonThatWasClicked)
             }
           }
           isprocessing=false;
+          // Clear the FileChooser after use
+          saveFileChooser.reset();
         });
         //[/UserButtonCode_saveasbutton]
     }
@@ -1454,7 +1477,7 @@ END_JUCER_METADATA
 
 // JUCER_RESOURCE: temp_png, 6283, "/div/notam02/u2/kjetism/localdomain/newmammut/temp.png"
 static const unsigned char resource_Interface_temp_png[] = { 137,80,78,71,13,10,26,10,0,0,0,13,73,72,68,82,0,0,1,246,0,0,0,117,8,6,0,0,0,188,184,195,126,0,0,0,6,98,75,71,68,0,255,0,255,0,255,160,189,167,
-147,0,0,0,9,112,72,89,115,0,0,11,19,0,0,11,19,1,0,154,156,24,0,0,0,7,116,73,77,69,7,215,2,15,19,53,42,134,166,211,72,0,0,0,29,116,69,88,116,67,111,109,109,101,110,116,0,67,114,101,97,116,101,100,32,119,
+147,0,0,0,9,112,72,89,115,0,0,11,19,0,0,11,19,1,0,154,156,24,0,0,0,7,116,73,77,69,7,215,2,15,19,53,42,134,166,211,72,0,0,0,29,116,69,88,116,67,111,109,101,110,116,0,67,114,101,97,116,101,100,32,119,
 105,116,104,32,84,104,101,32,71,73,77,80,239,100,37,110,0,0,23,239,73,68,65,84,120,218,237,157,121,140,93,213,125,199,63,119,236,241,50,222,176,7,131,177,97,12,134,177,141,193,30,76,217,113,18,194,210,
 134,173,105,66,90,66,10,37,149,138,34,161,180,21,73,160,109,162,182,105,144,218,40,10,137,69,211,74,148,164,34,162,68,133,224,0,101,77,217,83,108,179,152,197,54,120,197,6,198,11,198,44,94,102,236,177,
 103,59,253,227,247,187,188,59,111,246,183,204,91,238,247,35,61,189,217,222,204,155,123,207,57,223,243,251,157,223,18,133,16,16,66,8,33,68,117,80,163,75,32,132,16,66,72,216,133,16,66,8,33,97,23,66,8,33,
