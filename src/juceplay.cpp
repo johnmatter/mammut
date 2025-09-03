@@ -28,7 +28,7 @@ I'm sorry about all the non-C++ stuff. I'm not a big C++ fan.
 #include <samplerate.h>
 
 
-#include "juce.h"
+#include "JUCE_Includes.h"
 #include "mammut.h"
 #include "juceplay.h"
 
@@ -183,14 +183,14 @@ public:
     printf("Some audio change thing.\n");
     if(audioDeviceManager.getCurrentAudioDevice()!=NULL){
       samplerate=audioDeviceManager.getCurrentAudioDevice()->getCurrentSampleRate();
-      propertiesfile->setValue("audiodevicemanager",audioDeviceManager.createStateXml());
+      propertiesfile->setValue("audiodevicemanager",audioDeviceManager.createStateXml().get());
     }else{
       fprintf(stderr,"Gakkegakke\n");
     }
   }
   
   void initJuceAudio(void){
-    XmlElement *settings=propertiesfile->getXmlValue("audiodevicemanager");
+    XmlElement *settings=propertiesfile->getXmlValue("audiodevicemanager").get();
     const String error (audioDeviceManager.initialise (0, /* number of input channels */
 						       8, /* number of output channels */
 						       settings,
@@ -198,9 +198,13 @@ public:
     
     if (audioDeviceManager.getCurrentAudioDevice()==NULL || error.isNotEmpty())
       {
-	AlertWindow::showMessageBox (AlertWindow::WarningIcon,
-				     T("Mammut"),
-				     T("Couldn't open an output device!\n\n") + error);
+	AlertWindow::showOkCancelBox (AlertWindow::WarningIcon,
+				     "Mammut",
+				     "Couldn't open an output device!\n\n" + error,
+				     "OK",
+				     "Cancel",
+				     nullptr,
+				     nullptr);
       }
     else
       {
@@ -259,7 +263,8 @@ public:
       allocated_num_frames=num_frames;
     }
 #else
-    float outsound[num_frames*2];
+    // Use dynamic allocation instead of variable length array for C++ compatibility
+    float *outsound = new float[num_frames*2];
 #endif
 
     read=src_callback_read(oggsrc_state,ratio,num_frames,outsound);
@@ -272,6 +277,11 @@ public:
       float *newdst[2]={dst[0]+read,dst[1]+read};
       getOggResampledData(newdst,num_frames-read);
     }
+    
+    // Clean up dynamically allocated memory
+#ifndef _MSC_VER
+    delete[] outsound;
+#endif
   }
 
   float *getSourceData(int channel,int64_t position,int num_frames){
@@ -358,7 +368,6 @@ public:
 			     int 	totalNumOutputChannels, 
 			     int 	numSamples
 			     )
-    override
   {
 
     // First find the real number of totalNumOutputChannels.
@@ -507,7 +516,7 @@ public:
     // ...and show it in a DialogWindow...
     audioSettingsComp.setSize (400, 170);
     
-    DialogWindow::showModalDialog (T("Audio Settings"),
+    DialogWindow::showDialog ("Audio Settings",
 				   &audioSettingsComp,
 				   NULL,Colour((uint8)0xb90,(uint8)0x60,(uint8)0x60,(uint8)0xd0),true);
     if(audioDeviceManager.getCurrentAudioDevice()==NULL && isreadingdata==true){
