@@ -23,7 +23,7 @@
 #define __JUCER_HEADER_FILTER_FILTER_4C84C8E2__
 
 //[Headers]     -- You can add your own extra header files here --
-#include "juce.h"
+#include "JUCE_Includes.h"
 //[/Headers]
 
 

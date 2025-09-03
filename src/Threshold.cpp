@@ -181,7 +181,7 @@ void Threshold::buttonClicked (Button* buttonThatWasClicked)
     {
         //[UserButtonCode_resetbutton] -- add your button handler code here..
       resetval(threshold,threshold_level);
-      toggleButton->setToggleState(threshold_remove_above_threshold_default,true);
+      toggleButton->setToggleState(threshold_remove_above_threshold_default, true);
         //[/UserButtonCode_resetbutton]
     }
     else if (buttonThatWasClicked == textButton2)

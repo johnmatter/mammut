@@ -5,7 +5,7 @@
 
 #include "mammut.h"
 
-#include "juce.h"
+#include "JUCE_Includes.h"
 
 #include "tempfile.h"
 

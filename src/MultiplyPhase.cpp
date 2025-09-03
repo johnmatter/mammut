@@ -176,7 +176,7 @@ void MultiplyPhase::buttonClicked (Button* buttonThatWasClicked)
     {
         //[UserButtonCode_resetbutton] -- add your button handler code here..
       resetval(multiplyphase,phase_multiplier);
-      randomButton->setToggleState(multiplyphase_phase_random_default,true);
+      randomButton->setToggleState(multiplyphase_phase_random_default, true);
         //[/UserButtonCode_resetbutton]
     }
     else if (buttonThatWasClicked == textButton2)

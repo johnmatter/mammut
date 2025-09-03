@@ -23,7 +23,7 @@
 #define __JUCER_HEADER_SPECTRUMSHIFT_SPECTRUMSHIFT_9B3A543F__
 
 //[Headers]     -- You can add your own extra header files here --
-#include "juce.h"
+#include "JUCE_Includes.h"
 //[/Headers]
 
 

@@ -23,7 +23,7 @@
 #define __JUCER_HEADER_WOBBLE_WOBBLE_9256229C__
 
 //[Headers]     -- You can add your own extra header files here --
-#include "juce.h"
+#include "JUCE_Includes.h"
 //[/Headers]
 
 

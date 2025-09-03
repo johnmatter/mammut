@@ -27,7 +27,7 @@
 #ifndef _GRAPHCOMPONENT_H_
 #define _GRAPHCOMPONENT_H_
 
-#include "juce.h"
+#include "JUCE_Includes.h"
 
 //#include "mammut.h"
 extern void BlitWin(Graphics *g);

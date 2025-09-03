@@ -2,7 +2,7 @@
 #include "mammut.h"
 #include <stdarg.h>
 
-#include "juce.h"
+#include "JUCE_Includes.h"
 
 
 
@@ -16,9 +16,13 @@ void printerror(const char *fmt, ...){
   vsprintf(temp,fmt,argp);
   fprintf(stderr,"Mammut, error: %s\n",temp);
 
-  AlertWindow::showMessageBox (AlertWindow::WarningIcon,
-			       T("Mammut"),
-			       String(temp));
+  AlertWindow::showOkCancelBox (AlertWindow::WarningIcon,
+			       "Mammut",
+			       String(temp),
+			       "OK",
+			       "Cancel",
+			       nullptr,
+			       nullptr);
   
   va_end(argp);
 }

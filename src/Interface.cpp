@@ -396,7 +396,7 @@ Interface::Interface (DocumentWindow *mainwindow, const String& commandLine)
     abbutton->setRadioGroupId (23456);
     phaseampbutton->setRadioGroupId (23456);
 
-    convolvebutton->setToggleState(true,true);
+    convolvebutton->setToggleState(true, true);
 
     filewasjustsaved=false;
 
@@ -487,7 +487,7 @@ void Interface::paint (Graphics& g)
 
     g.setColour (Colours::black);
     g.setFont (Font (15.0000f, Font::plain));
-    g.drawText (String::empty,
+    g.drawText (String(),
                 408, 312, 200, 30,
                 Justification::centred, true);
 
@@ -678,24 +678,19 @@ void Interface::buttonClicked (Button* buttonThatWasClicked)
         //[UserButtonCode_loadbrowse] -- add your button handler code here..
       isprocessing=true;
       FileChooser myChooser ("Please choose file to load and analyze...",
-			     File::nonexistent,
-			     String::empty);
+			     File(),
+			     String());
 
-      if (myChooser.browseForFileToOpen())
-        {
-
-	  File mooseFile (myChooser.getResult());
-
-	  filename=(char*)mooseFile.getFullPathName().toRawUTF8();
-
-	  printf("Filename2: %s\n",filename);
-	  loadcomboBox->setText(mooseFile.getFullPathName(),false);
-
-	  //loadcomboBox->addItem(mooseFile.getFullPathName(),loadcomboBox->getNumItems()+1);
-
-        }
-
-      isprocessing=false;
+      myChooser.launchAsync(FileBrowserComponent::openMode | FileBrowserComponent::canSelectFiles,
+        [this](const FileChooser& chooser) {
+          if (chooser.getResult() != File{}) {
+            File mooseFile = chooser.getResult();
+            filename = (char*)mooseFile.getFullPathName().toRawUTF8();
+            printf("Filename2: %s\n", filename);
+            loadcomboBox->setText(mooseFile.getFullPathName());
+          }
+          isprocessing = false;
+        });
 
         //[/UserButtonCode_loadbrowse]
     }
@@ -706,19 +701,19 @@ void Interface::buttonClicked (Button* buttonThatWasClicked)
 	return;
       isprocessing=true;
       FileChooser myChooser ("Please choose file to load and multiply...",
-			     File::nonexistent,
-			     String::empty);
+			     File(),
+			     String());
 
-      if (myChooser.browseForFileToOpen())
-        {
-	  File mooseFile (myChooser.getResult());
-	  mulfilename=(char*)mooseFile.getFullPathName().toRawUTF8();
-	  printf("Mul Filename: %s\n",mulfilename);
-	  loadmulcomboBox->setText(mooseFile.getFullPathName(),false);
-	  //loadcomboBox->addItem(mooseFile.getFullPathName(),loadcomboBox->getNumItems()+1);
-
-        }
-      isprocessing=false;
+      myChooser.launchAsync(FileBrowserComponent::openMode | FileBrowserComponent::canSelectFiles,
+        [this](const FileChooser& chooser) {
+          if (chooser.getResult() != File{}) {
+            File mooseFile = chooser.getResult();
+            mulfilename = (char*)mooseFile.getFullPathName().toRawUTF8();
+            printf("Mul Filename: %s\n", mulfilename);
+            loadmulcomboBox->setText(mooseFile.getFullPathName());
+          }
+          isprocessing = false;
+        });
         //[/UserButtonCode_loadmulbrowse]
     }
     else if (buttonThatWasClicked == reload)
@@ -770,27 +765,33 @@ void Interface::buttonClicked (Button* buttonThatWasClicked)
         //[UserButtonCode_saveasbutton] -- add your button handler code here..
       isprocessing=true;
       FileChooser myChooser ("Please choose file to save...",
-			     File::nonexistent,
-			     String::empty);
+			     File(),
+			     String());
 
-      if (myChooser.browseForFileToSave(true))
-        {
-	  File mooseFile (myChooser.getResult());
-	  savefilename=(char*)mooseFile.getFullPathName().toRawUTF8();
-	  printf("Filename: %s\n",savefilename);
-	  MC_stop();
-	  char *error=MC_synthAndSave(savefilename);
-	  if(error!=NULL){
-	    AlertWindow::showMessageBox (AlertWindow::WarningIcon,
-					 ("Mammut"),
-					 String(error) + (" (") + String((const char*)savefilename) + (")"));
-	  }else{
-	    filewasjustsaved=true;
-	    mainwindow->setName(mooseFile.getFullPathName());
-	    //loadcomboBox->setText(mooseFile.getFullPathName(),false);
-	  }
-        }
-      isprocessing=false;
+      myChooser.launchAsync(FileBrowserComponent::saveMode | FileBrowserComponent::canSelectFiles,
+        [this](const FileChooser& chooser) {
+          if (chooser.getResult() != File{}) {
+            File mooseFile = chooser.getResult();
+            savefilename = (char*)mooseFile.getFullPathName().toRawUTF8();
+            printf("Filename: %s\n",savefilename);
+            MC_stop();
+            char *error=MC_synthAndSave(savefilename);
+            if(error!=NULL){
+              AlertWindow::showOkCancelBox (AlertWindow::WarningIcon,
+                                           "Mammut",
+                                           String(error) + (" (") + String((const char*)savefilename) + (")"),
+                                           "OK",
+                                           "Cancel",
+                                           nullptr,
+                                           nullptr);
+            }else{
+              filewasjustsaved=true;
+              mainwindow->setName(mooseFile.getFullPathName());
+              //loadcomboBox->setText(mooseFile.getFullPathName());
+            }
+          }
+          isprocessing=false;
+        });
         //[/UserButtonCode_saveasbutton]
     }
     else if (buttonThatWasClicked == aboutbutton)
@@ -820,14 +821,14 @@ void Interface::buttonClicked (Button* buttonThatWasClicked)
 			     "\n"+
 			     "Send your comments to k.s.matheussen@notam02.no.\n";
 
-      AlertWindow::showMessageBox(AlertWindow::InfoIcon,"Mammut",message); //StringArray(message,sizeof(message)/sizeof(const char*)).joinIntoString(String::empty));
+      AlertWindow::showOkCancelBox(AlertWindow::InfoIcon,"Mammut",message,"OK","Cancel",nullptr,nullptr); //StringArray(message,sizeof(message)/sizeof(const char*)).joinIntoString(String()));
 
         //[/UserButtonCode_aboutbutton]
     }
     else if (buttonThatWasClicked == prefsbutton)
     {
         //[UserButtonCode_prefsbutton] -- add your button handler code here..
-      DialogWindow::showModalDialog("Preferences",prefscomponent,this,Colour((uint8)0,(uint8)0,(uint8)0,(uint8)0x90),true);
+      DialogWindow::showDialog("Preferences",prefscomponent,this,Colour((uint8)0,(uint8)0,(uint8)0,(uint8)0x90),true);
         //[/UserButtonCode_prefsbutton]
     }
 }
@@ -912,7 +913,7 @@ void Interface::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
 	savefilename=NULL;
 	fprintf(stderr,"gakk gakk2!\n");
 	if(strcmp("",lastvalid))
-	  loadcomboBox->setText(lastvalid,true);
+	  loadcomboBox->setText(lastvalid);
 	return;
       }
       fprintf(stderr,"gakk gakk3!\n");
@@ -941,11 +942,11 @@ void Interface::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
 	char *error=loadFileMul((char*)loadmulcomboBox->getText().toRawUTF8());
 	if(error!=NULL){
 	  if(strcmp("",lastvalid))
-	    loadmulcomboBox->setText(lastvalid,true);
+	    loadmulcomboBox->setText(lastvalid);
 	  return;
 	}
       }else{
-	loadmulcomboBox->setText(String::empty);
+	loadmulcomboBox->setText(String());
 	return;
       }
 
@@ -961,7 +962,7 @@ void Interface::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
 void Interface::filesDropped (const StringArray& filenames, int mouseX, int mouseY)
 {
     //[UserCode_filesDropped] -- Add your code here...
-  loadcomboBox->setText(filenames[0],true);
+  loadcomboBox->setText(filenames[0]);
   loadFile((char*)filenames[0].toRawUTF8());
     //[/UserCode_filesDropped]
 }
@@ -1017,9 +1018,13 @@ char *Interface::loadFileMul(char *das_filename){
   MC_stop();
   char *error=MC_addUndo();
   if(error!=NULL){
-    AlertWindow::showMessageBox (AlertWindow::WarningIcon,
-				 ("Mammut"),
-				 String((const char*)error) + (" (") + loadmulcomboBox->getText() + (")."));
+    AlertWindow::showOkCancelBox (AlertWindow::WarningIcon,
+				 "Mammut",
+				 String((const char*)error) + (" (") + loadmulcomboBox->getText() + (")."),
+				 "OK",
+				 "Cancel",
+				 nullptr,
+				 nullptr);
     return error;
   }
 
@@ -1028,9 +1033,13 @@ char *Interface::loadFileMul(char *das_filename){
     graphcomponent->repaint();
     GUI_addUndo();
   }else{
-    AlertWindow::showMessageBox (AlertWindow::WarningIcon,
-				 ("Mammut"),
-				 String((const char*)error) + (" (") + loadmulcomboBox->getText() + (")."));
+    AlertWindow::showOkCancelBox (AlertWindow::WarningIcon,
+				 "Mammut",
+				 String((const char*)error) + (" (") + loadmulcomboBox->getText() + (")."),
+				 "OK",
+				 "Cancel",
+				 nullptr,
+				 nullptr);
     MC_undo();
   }
   return error;
@@ -1056,9 +1065,13 @@ bool Interface::loadFile(char *das_filename){
   char *error=MC_loadAndAnalyze(filename);
 
   if(error!=NULL){
-    AlertWindow::showMessageBox (AlertWindow::WarningIcon,
-				 ("Mammut"),
-				 String((const char*)error) + String(" (") + String(filename) + String(")"));
+    AlertWindow::showOkCancelBox (AlertWindow::WarningIcon,
+				 "Mammut",
+				 String((const char*)error) + String(" (") + String(filename) + String(")"),
+				 "OK",
+				 "Cancel",
+				 nullptr,
+				 nullptr);
     return false;
   }
 
@@ -1130,7 +1143,7 @@ void Interface::timerCallback(){
   if(havedoneinit==false && commandLine->length()>1){
     havedoneinit=true;
 	if(commandLine->startsWithChar('-')==false){
-		loadcomboBox->setText(*commandLine,true);
+		loadcomboBox->setText(*commandLine);
 		loadFile((char*)commandLine->toRawUTF8());
 	}
     printf("Im here\n");

@@ -2,7 +2,7 @@
 #include "mammut.h"
 #include "gui.h"
 
-#include "juce.h"
+#include "JUCE_Includes.h"
 
 #  include "GraphComponent.h"
 #  include "Interface.h"

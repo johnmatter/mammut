@@ -26,7 +26,7 @@
 
 //==============================================================================
 oggsoundholder::oggsoundholder ()
-    : Component (T("oggsoundholder"))
+    : Component ("oggsoundholder")
 {
     setSize (600, 400);
 

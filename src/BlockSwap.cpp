@@ -31,7 +31,7 @@
 
 //==============================================================================
 BlockSwap::BlockSwap ()
-    : Component (T("BlockSwap")),
+    : Component ("BlockSwap"),
       groupComponent (0),
       number_of_swapsslider (0),
       label (0),
@@ -43,12 +43,12 @@ BlockSwap::BlockSwap ()
       label3 (0),
       textButton2 (0)
 {
-    addAndMakeVisible (groupComponent = new GroupComponent (T("new group"),
-                                                            T("Block Swap")));
+    addAndMakeVisible (groupComponent = new GroupComponent ("new group",
+                                                            "Block Swap"));
     groupComponent->setTextLabelPosition (Justification::centredLeft);
     groupComponent->setColour (GroupComponent::outlineColourId, Colour (0xb0000000));
 
-    addAndMakeVisible (number_of_swapsslider = new Slider (T("new slider")));
+    addAndMakeVisible (number_of_swapsslider = new Slider ("new slider"));
     number_of_swapsslider->setRange (0, 10000, 1);
     number_of_swapsslider->setSliderStyle (Slider::LinearHorizontal);
     number_of_swapsslider->setTextBoxStyle (Slider::TextBoxLeft, false, 80, 20);
@@ -57,8 +57,8 @@ BlockSwap::BlockSwap ()
     number_of_swapsslider->setColour (Slider::textBoxBackgroundColourId, Colour (0xffffff));
     number_of_swapsslider->addListener (this);
 
-    addAndMakeVisible (label = new Label (T("new label"),
-                                          T("Number of swaps")));
+    addAndMakeVisible (label = new Label ("new label",
+                                          "Number of swaps"));
     label->setFont (Font (15.0000f, Font::plain));
     label->setJustificationType (Justification::centredLeft);
     label->setEditable (false, false, false);
@@ -68,16 +68,16 @@ BlockSwap::BlockSwap ()
     label->setColour (TextEditor::textColourId, Colours::black);
     label->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
-    addAndMakeVisible (textButton = new TextButton (T("new button")));
-    textButton->setButtonText (T("Do it!"));
+    addAndMakeVisible (textButton = new TextButton ("new button"));
+    textButton->setButtonText ("Do it!");
     textButton->addListener (this);
     textButton->setColour (TextButton::buttonColourId, Colour (0x39bbbbff));
 
-    addAndMakeVisible (toggleButton = new ToggleButton (T("new toggle button")));
-    toggleButton->setButtonText (T("Old version with error"));
+    addAndMakeVisible (toggleButton = new ToggleButton ("new toggle button"));
+    toggleButton->setButtonText ("Old version with error");
     toggleButton->addListener (this);
 
-    addAndMakeVisible (block_sizeslider = new Slider (T("new slider")));
+    addAndMakeVisible (block_sizeslider = new Slider ("new slider"));
     block_sizeslider->setRange (0, 100, 0);
     block_sizeslider->setSliderStyle (Slider::LinearHorizontal);
     block_sizeslider->setTextBoxStyle (Slider::TextBoxLeft, false, 80, 20);
@@ -86,8 +86,8 @@ BlockSwap::BlockSwap ()
     block_sizeslider->setColour (Slider::textBoxBackgroundColourId, Colour (0xffffff));
     block_sizeslider->addListener (this);
 
-    addAndMakeVisible (label2 = new Label (T("new label"),
-                                           T("Block size (0-100%)")));
+    addAndMakeVisible (label2 = new Label ("new label",
+                                           "Block size (0-100%)"));
     label2->setFont (Font (15.0000f, Font::plain));
     label2->setJustificationType (Justification::centredLeft);
     label2->setEditable (false, false, false);
@@ -97,13 +97,13 @@ BlockSwap::BlockSwap ()
     label2->setColour (TextEditor::textColourId, Colours::black);
     label2->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
-    addAndMakeVisible (resetbutton = new TextButton (T("resetbutton")));
-    resetbutton->setButtonText (T("reset"));
+    addAndMakeVisible (resetbutton = new TextButton ("resetbutton"));
+    resetbutton->setButtonText ("reset");
     resetbutton->addListener (this);
     resetbutton->setColour (TextButton::buttonColourId, Colour (0x4fbbbbff));
 
-    addAndMakeVisible (label3 = new Label (T("new label"),
-                                           T("Selects randomly positioned regions of the spectrum, and interchanges their halves. The Block size parameter sets the size of the blocks, given in percents of the whole frequency axis. This procedure is repeated a number of times, as specified, thus permutating the partials.")));
+    addAndMakeVisible (label3 = new Label ("new label",
+                                           "Selects randomly positioned regions of the spectrum, and interchanges their halves. The Block size parameter sets the size of the blocks, given in percents of the whole frequency axis. This procedure is repeated a number of times, as specified, thus permutating the partials."));
     label3->setFont (Font (11.2000f, Font::plain));
     label3->setJustificationType (Justification::centredLeft);
     label3->setEditable (false, false, false);
@@ -113,8 +113,8 @@ BlockSwap::BlockSwap ()
     label3->setColour (TextEditor::textColourId, Colours::black);
     label3->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
-    addAndMakeVisible (textButton2 = new TextButton (T("new button")));
-    textButton2->setButtonText (T("Redo it!"));
+    addAndMakeVisible (textButton2 = new TextButton ("new button"));
+    textButton2->setButtonText ("Redo it!");
     textButton2->addListener (this);
     textButton2->setColour (TextButton::buttonColourId, Colour (0x40bbbbff));
 
@@ -214,7 +214,7 @@ void BlockSwap::buttonClicked (Button* buttonThatWasClicked)
         //[UserButtonCode_resetbutton] -- add your button handler code here..
       resetval(blockswap,number_of_swaps);
       resetval(blockswap,block_size);
-      toggleButton->setToggleState(blockswap_old_version_with_error,true);
+      toggleButton->setToggleState(blockswap_old_version_with_error, true);
         //[/UserButtonCode_resetbutton]
     }
     else if (buttonThatWasClicked == textButton2)

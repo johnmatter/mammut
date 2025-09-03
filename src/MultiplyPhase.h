@@ -23,7 +23,7 @@
 #define __JUCER_HEADER_MULTIPLYPHASE_MULTIPLYPHASE_5925E8C7__
 
 //[Headers]     -- You can add your own extra header files here --
-#include "juce.h"
+#include "JUCE_Includes.h"
 //[/Headers]
 
 

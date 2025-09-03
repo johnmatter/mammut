@@ -34,8 +34,8 @@ namespace AppSettings
 	const int appMaxHeight		=	800;
 #endif
 	const int titleBarHeight	=	20;
-	const String appName		=	T("Tutorial App");
-	const String appVersion		=	T("0.0");
+	const String appName		=	"Tutorial App";
+	const String appVersion		=	"0.0";
 	bool multipleInstances		=	false;
 }
 

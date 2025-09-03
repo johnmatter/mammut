@@ -21,7 +21,7 @@
 
 //[Headers] You can add your own extra header files here...
 #include "transformheader.h"
-#include "juce.h"
+#include "JUCE_Includes.h"
 
 #include "Stretch.h"
 #define Slider DasSlider

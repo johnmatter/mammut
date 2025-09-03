@@ -19,7 +19,7 @@
 
 //[Headers] You can add your own extra header files here...
 #include "mammut.h"
-#include "juce.h"
+#include "JUCE_Includes.h"
 #include "juceplay.h"
 //[/Headers]
 
@@ -77,17 +77,17 @@ Prefs::Prefs ()
     options.filenameSuffix = ".prefs";
     options.storageFormat = PropertiesFile::StorageFormat::storeAsXML;
     propertiesfile = new PropertiesFile(options);
-      //PropertiesFile::createDefaultAppPropertiesFile("mammut",".prefs",String::empty,false,0,PropertiesFile::storeAsXML);
+      //PropertiesFile::createDefaultAppPropertiesFile("mammut",".prefs",String(),false,0,PropertiesFile::storeAsXML);
 
     //propertiesfile->setValue("tes",54);
     //printf("get: -%d-\n",propertiesfile->getIntValue("tes"));
     //printf("Getting: %d\n",propertiesfile->getBoolValue(soundonoffButton->getButtonText(),true)==true?1:0);
 
-    soundonoffButton->setToggleState(propertiesfile->getBoolValue(soundonoffButton->getButtonText().replaceCharacters(String(" "),String("_")),prefs_soundonoff),true);
-    pictureButton->setToggleState(propertiesfile->getBoolValue(pictureButton->getButtonText().replaceCharacters(String(" "),String("_")),prefs_picture),true);
-    movingcameraButton->setToggleState(propertiesfile->getBoolValue(movingcameraButton->getButtonText().replaceCharacters(String(" "),String("_")),prefs_movingcamera),true);
-    animationButton->setToggleState(propertiesfile->getBoolValue(animationButton->getButtonText().replaceCharacters(String(" "),String("_")),prefs_animation),true);
-    loopButton->setToggleState(propertiesfile->getBoolValue(loopButton->getButtonText().replaceCharacters(String(" "),String("_")),prefs_loop),true);
+    soundonoffButton->setToggleState(propertiesfile->getBoolValue(soundonoffButton->getButtonText().replaceCharacters(String(" ", true),String("_")),prefs_soundonoff),true);
+    pictureButton->setToggleState(propertiesfile->getBoolValue(pictureButton->getButtonText().replaceCharacters(String(" ", true),String("_")),prefs_picture),true);
+    movingcameraButton->setToggleState(propertiesfile->getBoolValue(movingcameraButton->getButtonText().replaceCharacters(String(" ", true),String("_")),prefs_movingcamera),true);
+    animationButton->setToggleState(propertiesfile->getBoolValue(animationButton->getButtonText().replaceCharacters(String(" ", true),String("_")),prefs_animation),true);
+    loopButton->setToggleState(propertiesfile->getBoolValue(loopButton->getButtonText().replaceCharacters(String(" ", true),String("_")),prefs_loop),true);
     //[/Constructor]
 }
 
@@ -174,8 +174,8 @@ void Prefs::buttonClicked (Button* buttonThatWasClicked)
       //sleep(1);
 #if 0
       if(prefs_picture==false){
-	movingcameraButton->setToggleState(false,true);
-	animationButton->setToggleState(false,true);
+	movingcameraButton->setToggleState(false, true);
+	animationButton->setToggleState(false, true);
       }
 #endif
       //      sleep(1);

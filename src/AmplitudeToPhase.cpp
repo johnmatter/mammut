@@ -31,7 +31,7 @@
 
 //==============================================================================
 AmplitudeToPhase::AmplitudeToPhase ()
-    : Component (T("AmplitudeToPhase")),
+    : Component ("AmplitudeToPhase"),
       groupComponent (0),
       amplitude_multiplierslider (0),
       label (0),
@@ -40,12 +40,12 @@ AmplitudeToPhase::AmplitudeToPhase ()
       label2 (0),
       textButton2 (0)
 {
-    addAndMakeVisible (groupComponent = new GroupComponent (T("new group"),
-                                                            T("Amplitude->Phase")));
+    addAndMakeVisible (groupComponent = new GroupComponent ("new group",
+                                                            "Amplitude->Phase"));
     groupComponent->setTextLabelPosition (Justification::centredLeft);
     groupComponent->setColour (GroupComponent::outlineColourId, Colour (0xb0000000));
 
-    addAndMakeVisible (amplitude_multiplierslider = new Slider (T("new slider")));
+    addAndMakeVisible (amplitude_multiplierslider = new Slider ("new slider"));
     amplitude_multiplierslider->setRange (0, 100, 0);
     amplitude_multiplierslider->setSliderStyle (Slider::LinearHorizontal);
     amplitude_multiplierslider->setTextBoxStyle (Slider::TextBoxLeft, false, 80, 20);
@@ -54,8 +54,8 @@ AmplitudeToPhase::AmplitudeToPhase ()
     amplitude_multiplierslider->setColour (Slider::textBoxBackgroundColourId, Colour (0xffffff));
     amplitude_multiplierslider->addListener (this);
 
-    addAndMakeVisible (label = new Label (T("new label"),
-                                          T("Amplitude multiplier (0-100)")));
+    addAndMakeVisible (label = new Label ("new label",
+                                          "Amplitude multiplier (0-100)"));
     label->setFont (Font (15.0000f, Font::plain));
     label->setJustificationType (Justification::centredLeft);
     label->setEditable (false, false, false);
@@ -65,18 +65,18 @@ AmplitudeToPhase::AmplitudeToPhase ()
     label->setColour (TextEditor::textColourId, Colours::black);
     label->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
-    addAndMakeVisible (textButton = new TextButton (T("new button")));
-    textButton->setButtonText (T("Do it!"));
+    addAndMakeVisible (textButton = new TextButton ("new button"));
+    textButton->setButtonText ("Do it!");
     textButton->addListener (this);
     textButton->setColour (TextButton::buttonColourId, Colour (0x4bbbbbff));
 
-    addAndMakeVisible (resetbutton = new TextButton (T("resetbutton")));
-    resetbutton->setButtonText (T("reset"));
+    addAndMakeVisible (resetbutton = new TextButton ("resetbutton"));
+    resetbutton->setButtonText ("reset");
     resetbutton->addListener (this);
     resetbutton->setColour (TextButton::buttonColourId, Colour (0x40bbbbff));
 
-    addAndMakeVisible (label2 = new Label (T("new label"),
-                                           T("The phases of the partials are set to their respective amplitudes, after a specified gain multiplication. Rather useless.")));
+    addAndMakeVisible (label2 = new Label ("new label",
+                                           "The phases of the partials are set to their respective amplitudes, after a specified gain multiplication. Rather useless."));
     label2->setFont (Font (15.0000f, Font::plain));
     label2->setJustificationType (Justification::centredLeft);
     label2->setEditable (false, false, false);
@@ -86,8 +86,8 @@ AmplitudeToPhase::AmplitudeToPhase ()
     label2->setColour (TextEditor::textColourId, Colours::black);
     label2->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
-    addAndMakeVisible (textButton2 = new TextButton (T("new button")));
-    textButton2->setButtonText (T("Redo it!"));
+    addAndMakeVisible (textButton2 = new TextButton ("new button"));
+    textButton2->setButtonText ("Redo it!");
     textButton2->addListener (this);
     textButton2->setColour (TextButton::buttonColourId, Colour (0x40bbbbff));
 

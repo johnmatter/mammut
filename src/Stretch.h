@@ -23,7 +23,7 @@
 #define __JUCER_HEADER_STRETCH_STRETCH_2C2E6548__
 
 //[Headers]     -- You can add your own extra header files here --
-#include "juce.h"
+#include "JUCE_Includes.h"
 
 
 

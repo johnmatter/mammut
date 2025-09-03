@@ -23,7 +23,7 @@
 #define __JUCER_HEADER_MIRROR_MIRROR_72236A5B__
 
 //[Headers]     -- You can add your own extra header files here --
-#include "juce.h"
+#include "JUCE_Includes.h"
 //[/Headers]
 
 

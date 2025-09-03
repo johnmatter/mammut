@@ -24,7 +24,7 @@
 #define _APPSETTINGS_H_
 
 // include the JUCE headers..
-#include "juce.h"
+#include "JUCE_Includes.h"
 
 namespace AppSettings
 {

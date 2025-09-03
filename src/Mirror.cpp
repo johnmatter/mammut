@@ -31,7 +31,7 @@
 
 //==============================================================================
 Mirror::Mirror ()
-    : Component (T("Mirror")),
+    : Component ("Mirror"),
       groupComponent (0),
       textButton (0),
       description (0),
@@ -40,18 +40,18 @@ Mirror::Mirror ()
       resetbutton (0),
       textButton2 (0)
 {
-    addAndMakeVisible (groupComponent = new GroupComponent (T("new group"),
-                                                            T("Mirror")));
+    addAndMakeVisible (groupComponent = new GroupComponent ("new group",
+                                                            "Mirror"));
     groupComponent->setTextLabelPosition (Justification::centredLeft);
     groupComponent->setColour (GroupComponent::outlineColourId, Colour (0xb0000000));
 
-    addAndMakeVisible (textButton = new TextButton (T("new button")));
-    textButton->setButtonText (T("Do it!"));
+    addAndMakeVisible (textButton = new TextButton ("new button"));
+    textButton->setButtonText ("Do it!");
     textButton->addListener (this);
     textButton->setColour (TextButton::buttonColourId, Colour (0x25bbbbff));
 
-    addAndMakeVisible (description = new Label (T("new label"),
-                                                T("Reflects the whole spectrum around the frequency you specify. ")));
+    addAndMakeVisible (description = new Label ("new label",
+                                                "Reflects the whole spectrum around the frequency you specify. "));
     description->setFont (Font (15.0000f, Font::plain));
     description->setJustificationType (Justification::centredLeft);
     description->setEditable (false, false, false);
@@ -61,7 +61,7 @@ Mirror::Mirror ()
     description->setColour (TextEditor::textColourId, Colours::black);
     description->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
-    addAndMakeVisible (mirror_frequencyslider = new Slider (T("new slider")));
+    addAndMakeVisible (mirror_frequencyslider = new Slider ("new slider"));
     mirror_frequencyslider->setRange (0, 22050, 0);
     mirror_frequencyslider->setSliderStyle (Slider::LinearHorizontal);
     mirror_frequencyslider->setTextBoxStyle (Slider::TextBoxLeft, false, 80, 20);
@@ -70,8 +70,8 @@ Mirror::Mirror ()
     mirror_frequencyslider->setColour (Slider::textBoxBackgroundColourId, Colour (0xffffff));
     mirror_frequencyslider->addListener (this);
 
-    addAndMakeVisible (label = new Label (T("new label"),
-                                          T("Mirror frequency (Hz)")));
+    addAndMakeVisible (label = new Label ("new label",
+                                          "Mirror frequency (Hz)"));
     label->setFont (Font (15.0000f, Font::plain));
     label->setJustificationType (Justification::centredLeft);
     label->setEditable (false, false, false);
@@ -81,13 +81,13 @@ Mirror::Mirror ()
     label->setColour (TextEditor::textColourId, Colours::black);
     label->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
-    addAndMakeVisible (resetbutton = new TextButton (T("new button")));
-    resetbutton->setButtonText (T("Reset"));
+    addAndMakeVisible (resetbutton = new TextButton ("new button"));
+    resetbutton->setButtonText ("Reset");
     resetbutton->addListener (this);
     resetbutton->setColour (TextButton::buttonColourId, Colour (0x25bbbbff));
 
-    addAndMakeVisible (textButton2 = new TextButton (T("new button")));
-    textButton2->setButtonText (T("Redo it!"));
+    addAndMakeVisible (textButton2 = new TextButton ("new button"));
+    textButton2->setButtonText ("Redo it!");
     textButton2->addListener (this);
     textButton2->setColour (TextButton::buttonColourId, Colour (0x25bbbbff));
 

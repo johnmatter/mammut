@@ -27,23 +27,23 @@
 
 //==============================================================================
 Zoom::Zoom ()
-    : Component (T("Zoom")),
+    : Component ("Zoom"),
       groupComponent2 (0),
       zoomtoggle (0),
       zoomleft (0),
       zoomright (0)
 {
-    addAndMakeVisible (groupComponent2 = new GroupComponent (T("new group"),
-                                                             T("Zoom")));
+    addAndMakeVisible (groupComponent2 = new GroupComponent ("new group",
+                                                             "Zoom"));
     groupComponent2->setTextLabelPosition (Justification::centredLeft);
     groupComponent2->setColour (GroupComponent::outlineColourId, Colour (0xb0000000));
 
-    addAndMakeVisible (zoomtoggle = new ToggleButton (T("new toggle button")));
-    zoomtoggle->setButtonText (T("Zoom"));
+    addAndMakeVisible (zoomtoggle = new ToggleButton ("new toggle button"));
+    zoomtoggle->setButtonText ("Zoom");
     zoomtoggle->addListener (this);
 
-    addAndMakeVisible (zoomleft = new TextButton (T("Play")));
-    zoomleft->setButtonText (T("<"));
+    addAndMakeVisible (zoomleft = new TextButton ("Play"));
+    zoomleft->setButtonText ("<");
     zoomleft->setConnectedEdges (Button::ConnectedOnRight);
     zoomleft->addListener (this);
     zoomleft->setColour (TextButton::buttonColourId, Colour (0x7bb46b1f));
@@ -51,8 +51,8 @@ Zoom::Zoom ()
     zoomleft->setColour (TextButton::textColourOnId, Colours::black);
     zoomleft->setColour (TextButton::textColourOffId, Colours::black);
 
-    addAndMakeVisible (zoomright = new TextButton (T("Play")));
-    zoomright->setButtonText (T(">"));
+    addAndMakeVisible (zoomright = new TextButton ("Play"));
+    zoomright->setButtonText (">");
     zoomright->setConnectedEdges (Button::ConnectedOnLeft);
     zoomright->addListener (this);
     zoomright->setColour (TextButton::buttonColourId, Colour (0x8fab6e38));

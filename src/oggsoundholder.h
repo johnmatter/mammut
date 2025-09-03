@@ -21,7 +21,7 @@
 #define __JUCER_HEADER_OGGSOUNDHOLDER_OGGSOUNDHOLDER_979F6855__
 
 //[Headers]     -- You can add your own extra header files here --
-#include "juce.h"
+#include "JUCE_Includes.h"
 //[/Headers]
 
 

@@ -21,7 +21,7 @@
 #define __JUCER_HEADER_KEEPPEAKS_KEEPPEAKS_CA9FE13C__
 
 //[Headers]     -- You can add your own extra header files here --
-#include "juce.h"
+#include "JUCE_Includes.h"
 //[/Headers]
 
 

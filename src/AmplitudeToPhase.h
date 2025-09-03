@@ -23,7 +23,7 @@
 #define __JUCER_HEADER_AMPLITUDETOPHASE_AMPLITUDETOPHASE_3F4E310E__
 
 //[Headers]     -- You can add your own extra header files here --
-#include "juce.h"
+#include "JUCE_Includes.h"
 //[/Headers]
 
 

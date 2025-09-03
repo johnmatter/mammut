@@ -27,7 +27,7 @@
 #ifndef _fMainAppWindow_H__
 #define _fMainAppWindow_H__
 
-#include "juce.h"
+#include "JUCE_Includes.h"
 
 class Interface;
 

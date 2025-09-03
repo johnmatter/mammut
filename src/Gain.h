@@ -23,7 +23,7 @@
 #define __JUCER_HEADER_GAIN_GAIN_2910006__
 
 //[Headers]     -- You can add your own extra header files here --
-#include "juce.h"
+#include "JUCE_Includes.h"
 //[/Headers]
 
 

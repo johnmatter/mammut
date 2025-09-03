@@ -27,17 +27,17 @@
 
 //==============================================================================
 KeepPeaks::KeepPeaks ()
-    : Component (T("KeepPeaks")),
+    : Component ("KeepPeaks"),
       groupComponent (0),
       textButton (0)
 {
-    addAndMakeVisible (groupComponent = new GroupComponent (T("new group"),
-                                                            T("Keep Peaks")));
+    addAndMakeVisible (groupComponent = new GroupComponent ("new group",
+                                                            "Keep Peaks"));
     groupComponent->setTextLabelPosition (Justification::centredLeft);
     groupComponent->setColour (GroupComponent::outlineColourId, Colour (0xb0000000));
 
-    addAndMakeVisible (textButton = new TextButton (T("new button")));
-    textButton->setButtonText (T("Do it!"));
+    addAndMakeVisible (textButton = new TextButton ("new button"));
+    textButton->setButtonText ("Do it!");
     textButton->addListener (this);
     textButton->setColour (TextButton::buttonColourId, Colour (0x1fbbffd4));
 

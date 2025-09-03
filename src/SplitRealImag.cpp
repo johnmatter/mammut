@@ -27,17 +27,17 @@
 
 //==============================================================================
 SplitRealImag::SplitRealImag ()
-    : Component (T("SplitRealImag")),
+    : Component ("SplitRealImag"),
       groupComponent (0),
       textButton (0)
 {
-    addAndMakeVisible (groupComponent = new GroupComponent (T("new group"),
-                                                            T("Slit Real/Imag")));
+    addAndMakeVisible (groupComponent = new GroupComponent ("new group",
+                                                            "Slit Real/Imag"));
     groupComponent->setTextLabelPosition (Justification::centredLeft);
     groupComponent->setColour (GroupComponent::outlineColourId, Colour (0xb0000000));
 
-    addAndMakeVisible (textButton = new TextButton (T("new button")));
-    textButton->setButtonText (T("Do it!"));
+    addAndMakeVisible (textButton = new TextButton ("new button"));
+    textButton->setButtonText ("Do it!");
     textButton->addListener (this);
     textButton->setColour (TextButton::buttonColourId, Colour (0x37bbbbff));
 

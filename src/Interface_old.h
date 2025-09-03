@@ -21,7 +21,7 @@
 #define __JUCER_HEADER_INTERFACE_INTERFACE_8057BDDA__
 
 //[Headers]     -- You can add your own extra header files here --
-#include "juce.h"
+#include "JUCE_Includes.h"
 #include "mammut.h"
 #include "GraphComponent.h"
 //[/Headers]

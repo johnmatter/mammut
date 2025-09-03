@@ -2,7 +2,7 @@
 #include "mammut.h"
 #include "undo.h"
 
-#include "juce.h"
+#include "JUCE_Includes.h"
 #include "juceplay.h"
 //#define g.fillall black 
 //Color(50,60,70,80)

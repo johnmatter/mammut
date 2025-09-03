@@ -21,7 +21,7 @@
 #define __JUCER_HEADER_SPLITREALIMAG_SPLITREALIMAG_88774AA9__
 
 //[Headers]     -- You can add your own extra header files here --
-#include "juce.h"
+#include "JUCE_Includes.h"
 //[/Headers]
 
 

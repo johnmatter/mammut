@@ -1,6 +1,6 @@
 
 #include "mammut.h"
-#include "juce.h"
+#include "JUCE_Includes.h"
 #include "undo.h"
 
 
@@ -9,7 +9,7 @@ static void (*func)(void)=NULL;
 class MyTask  : public ThreadWithProgressWindow
 {
 public:
-  MyTask()    : ThreadWithProgressWindow (T("busy..."), true, false)
+  MyTask()    : ThreadWithProgressWindow ("busy...", true, false)
   {
   }
   
@@ -47,7 +47,7 @@ class MyProgressBar : public Thread
 {
 
 public:
-  MyProgressBar() : Thread(T("myprogressbar")) {
+  MyProgressBar() : Thread("myprogressbar") {
     is_running=false;
     above_curr=0;
     above_max=1;
@@ -155,7 +155,7 @@ void GUI_newprocess(void das_func(void)){
   mytask->setProgress(0.0);
 
   func=das_func;
-  mytask->runThread();
+  mytask->run();
 }
 
 
@@ -174,7 +174,7 @@ void Transformit(void das_func(void)){
   func=das_func;  
 
   //cs->enter();
-  mytask->runThread();
+  mytask->run();
   //cs->exit();
 
   RedrawWin();
@@ -197,7 +197,7 @@ void ReTransformit(void das_func(void)){
   //GUI_addUndo();
 
   func=das_func;  
-  mytask->runThread();
+  mytask->run();
 
   RedrawWin();
 

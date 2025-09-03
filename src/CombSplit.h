@@ -23,7 +23,7 @@
 #define __JUCER_HEADER_COMBSPLIT_COMBSPLIT_22B5F0B9__
 
 //[Headers]     -- You can add your own extra header files here --
-#include "juce.h"
+#include "JUCE_Includes.h"
 //[/Headers]
 
 

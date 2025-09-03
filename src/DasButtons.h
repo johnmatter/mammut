@@ -33,7 +33,7 @@
 #define __JUCER_COMPONENTTEMPLATE_JUCEHEADER__
 
 //[Headers]     -- You can add your own extra header files here --
-#include "juce.h"
+#include "JUCE_Includes.h"
 //[/Headers]
 
 

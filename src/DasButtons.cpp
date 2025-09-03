@@ -47,57 +47,57 @@ DasButtons::DasButtons ()
     slider (0)
 {
 
-    gc=new GroupComponent(T("ai"),T("")),
+    gc=new GroupComponent("ai",""),
     gc->setSize (700, 100);
     gc->setBounds(0,0,700,100);
     addAndMakeVisible(gc);
 
-    gc->addAndMakeVisible (textButton1 = new TextButton (T("Play")));
+    gc->addAndMakeVisible (textButton1 = new TextButton ("Play"));
     textButton1->addButtonListener (this);
     textButton1->setColour (TextButton::buttonColourId, Colour (0xffbbbbff));
     textButton1->setColour (TextButton::buttonOnColourId, Colour (0xff4444ff));
     textButton1->setColour (TextButton::textColourId, Colours::black);
 
-    gc->addAndMakeVisible (textButton4 = new TextButton (T("Play")));
-    textButton4->setButtonText (T("<"));
+    gc->addAndMakeVisible (textButton4 = new TextButton ("Play"));
+    textButton4->setButtonText ("<");
     textButton4->addButtonListener (this);
     textButton4->setColour (TextButton::buttonColourId, Colour (0xffbbbbff));
     textButton4->setColour (TextButton::buttonOnColourId, Colour (0xff4444ff));
     textButton4->setColour (TextButton::textColourId, Colours::black);
 
-    gc->addAndMakeVisible (textButton2 = new TextButton (T("Play")));
-    textButton2->setButtonText (T("Stop"));
+    gc->addAndMakeVisible (textButton2 = new TextButton ("Play"));
+    textButton2->setButtonText ("Stop");
     textButton2->addButtonListener (this);
     textButton2->setColour (TextButton::buttonColourId, Colour (0xffbbbbff));
     textButton2->setColour (TextButton::buttonOnColourId, Colour (0xff4444ff));
     textButton2->setColour (TextButton::textColourId, Colours::black);
 
-    gc->addAndMakeVisible (textButton5 = new TextButton (T("Play")));
-    textButton5->setButtonText (T(">"));
+    gc->addAndMakeVisible (textButton5 = new TextButton ("Play"));
+    textButton5->setButtonText (">");
     textButton5->addButtonListener (this);
     textButton5->setColour (TextButton::buttonColourId, Colour (0xffbbbbff));
     textButton5->setColour (TextButton::buttonOnColourId, Colour (0xff4444ff));
     textButton5->setColour (TextButton::textColourId, Colours::black);
 
-    gc->addAndMakeVisible (textButton6 = new TextButton (T("Play")));
-    textButton6->setButtonText (T("Undo"));
+    gc->addAndMakeVisible (textButton6 = new TextButton ("Play"));
+    textButton6->setButtonText ("Undo");
     textButton6->addButtonListener (this);
     textButton6->setColour (TextButton::buttonColourId, Colour (0xffbbbbff));
     textButton6->setColour (TextButton::buttonOnColourId, Colour (0xff4444ff));
     textButton6->setColour (TextButton::textColourId, Colours::black);
 
-    gc->addAndMakeVisible (textButton7 = new TextButton (T("Play")));
-    textButton7->setButtonText (T("Redo"));
+    gc->addAndMakeVisible (textButton7 = new TextButton ("Play"));
+    textButton7->setButtonText ("Redo");
     textButton7->addButtonListener (this);
     textButton7->setColour (TextButton::buttonColourId, Colour (0xffbbbbff));
     textButton7->setColour (TextButton::buttonOnColourId, Colour (0xff4444ff));
     textButton7->setColour (TextButton::textColourId, Colours::black);
 
-    gc->addAndMakeVisible (toggleButton3 = new ToggleButton (T("new toggle button")));
-    toggleButton3->setButtonText (T("Zoom"));
+    gc->addAndMakeVisible (toggleButton3 = new ToggleButton ("new toggle button"));
+    toggleButton3->setButtonText ("Zoom");
     toggleButton3->addButtonListener (this);
 
-    gc->addAndMakeVisible (slider = new Slider (T("new slider")));
+    gc->addAndMakeVisible (slider = new Slider ("new slider"));
     slider->setRange (0, 100, 0);
     slider->setSliderStyle (Slider::LinearBar);
     slider->setTextBoxStyle (Slider::TextBoxLeft, false, 80, 20);
