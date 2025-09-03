@@ -9,16 +9,16 @@ set -x
 
 cd src
 
-make -f Makefile.linux clean
-make -f Makefile.linux -j8
+# make -f Makefile.linux clean
+# make -f Makefile.linux -j8
 
 unset PKG_CONFIG_PATH
 
 make -f Makefile.macos clean
-make -f Makefile.macos -j8
+make -f Makefile.macos -j
 make -f Makefile.macos install
 
-make -f Makefile.mingw clean
-make -f Makefile.mingw -j8
-make -f Makefile.mingw install
+# make -f Makefile.mingw clean
+# make -f Makefile.mingw -j8
+# make -f Makefile.mingw install
 
