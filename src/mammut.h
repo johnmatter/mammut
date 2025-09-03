@@ -58,9 +58,13 @@ struct LoadStruct{
     #else
         #define AVOIDDENORMALS _mm_setcsr(_mm_getcsr() | 0x8000)
     #endif
+#elif defined(__ARM_NEON) || defined(__aarch64__)
+    // On ARM (Apple Silicon), we can use ARM NEON intrinsics or just define as no-op
+    // since ARM handles denormals efficiently by default
+    #define AVOIDDENORMALS ((void)0)
 #else
-#   error "AVOIDDENORMALS is not defined"
-    #define AVOIDDENORMALS 
+    // For other architectures, define as no-op
+    #define AVOIDDENORMALS ((void)0)
 #endif
 
 
