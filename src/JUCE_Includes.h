@@ -13,5 +13,8 @@
 #include <juce_events/juce_events.h>
 #include <juce_graphics/juce_graphics.h>
 
+// Standard library includes
+#include <memory>
+
 // Common JUCE types
 using namespace juce;
