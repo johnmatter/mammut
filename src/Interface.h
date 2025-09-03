@@ -98,6 +98,11 @@ private:
     int pic_y2;
     String *commandLine;
     DocumentWindow *mainwindow;
+    
+    // FileChooser objects to keep alive during async operations
+    std::unique_ptr<FileChooser> loadFileChooser;
+    std::unique_ptr<FileChooser> loadMulFileChooser;
+    std::unique_ptr<FileChooser> saveFileChooser;
     //[/UserVariables]
 
     //==============================================================================
