@@ -56,7 +56,7 @@ AmplitudeToPhase::AmplitudeToPhase ()
 
     addAndMakeVisible (label = new Label ("new label",
                                           "Amplitude multiplier (0-100)"));
-    label->setFont (Font (15.0000f, Font::plain));
+    label->setFont (Font (FontOptions (15.0000f, Font::plain)));
     label->setJustificationType (Justification::centredLeft);
     label->setEditable (false, false, false);
     label->setColour (Label::backgroundColourId, Colour (0x0));
@@ -77,7 +77,7 @@ AmplitudeToPhase::AmplitudeToPhase ()
 
     addAndMakeVisible (label2 = new Label ("new label",
                                            "The phases of the partials are set to their respective amplitudes, after a specified gain multiplication. Rather useless."));
-    label2->setFont (Font (15.0000f, Font::plain));
+    label2->setFont (Font (FontOptions (15.0000f, Font::plain)));
     label2->setJustificationType (Justification::centredLeft);
     label2->setEditable (false, false, false);
     label2->setColour (Label::backgroundColourId, Colour (0x0));

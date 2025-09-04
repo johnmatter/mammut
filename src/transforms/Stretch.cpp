@@ -60,7 +60,7 @@ Stretch::Stretch ()
 
     addAndMakeVisible (label = new Label (("new label"),
                                           ("Exponent")));
-    label->setFont (Font (15.0000f, Font::plain));
+    label->setFont (Font (FontOptions (15.0000f, Font::plain)));
     label->setJustificationType (Justification::centredLeft);
     label->setEditable (false, false, false);
     label->setColour (Label::backgroundColourId, Colour (0x0));
@@ -81,7 +81,7 @@ Stretch::Stretch ()
 
     addAndMakeVisible (label2 = new Label (("new label"),
                                            ("\nAll frequencies will be raised to the power of the exponent you specify, and the frequency axis is then re-normalized. This is a non-linear stretching of the frequency axis. Values close to 1 (0.9-1.1) are recommended. This transform will produce dispersion effects, with frequency sweeps. \n\n")));
-    label2->setFont (Font (11.2000f, Font::plain));
+    label2->setFont (Font (FontOptions (11.2000f, Font::plain)));
     label2->setJustificationType (Justification::centredLeft);
     label2->setEditable (false, false, false);
     label2->setColour (Label::backgroundColourId, Colour (0x0));

@@ -58,7 +58,7 @@ MultiplyPhase::MultiplyPhase ()
 
     addAndMakeVisible (label = new Label (("new label"),
                                           ("Phase multiplier (-5 5)")));
-    label->setFont (Font (15.0000f, Font::plain));
+    label->setFont (Font (FontOptions (15.0000f, Font::plain)));
     label->setJustificationType (Justification::centredLeft);
     label->setEditable (false, false, false);
     label->setColour (Label::backgroundColourId, Colour (0x0));
@@ -79,7 +79,7 @@ MultiplyPhase::MultiplyPhase ()
 
     addAndMakeVisible (label2 = new Label (("new label"),
                                            ("Multiply all phases with the value you specify. A value of -1 will reverse the sound.\n")));
-    label2->setFont (Font (15.0000f, Font::plain));
+    label2->setFont (Font (FontOptions (15.0000f, Font::plain)));
     label2->setJustificationType (Justification::centredLeft);
     label2->setEditable (false, false, false);
     label2->setColour (Label::backgroundColourId, Colour (0x0));
@@ -176,7 +176,7 @@ void MultiplyPhase::buttonClicked (Button* buttonThatWasClicked)
     {
         //[UserButtonCode_resetbutton] -- add your button handler code here..
       resetval(multiplyphase,phase_multiplier);
-      randomButton->setToggleState(multiplyphase_phase_random_default, true);
+      randomButton->setToggleState(multiplyphase_phase_random_default, juce::NotificationType::sendNotification);
         //[/UserButtonCode_resetbutton]
     }
     else if (buttonThatWasClicked == textButton2)

@@ -56,7 +56,7 @@ SpectrumShift::SpectrumShift ()
 
     addAndMakeVisible (label = new Label (("new label"),
                                           ("Shift value (Hz)")));
-    label->setFont (Font (15.0000f, Font::plain));
+    label->setFont (Font (FontOptions (15.0000f, Font::plain)));
     label->setJustificationType (Justification::centredLeft);
     label->setEditable (false, false, false);
     label->setColour (Label::backgroundColourId, Colour (0x0));
@@ -77,7 +77,7 @@ SpectrumShift::SpectrumShift ()
 
     addAndMakeVisible (label2 = new Label (("new label"),
                                            ("Optimal spectrum shift, with no window artefacts. The frequency you specify (positive or negative) will be added to all frequency values, shifting the spectrum up or down.")));
-    label2->setFont (Font (15.0000f, Font::plain));
+    label2->setFont (Font (FontOptions (15.0000f, Font::plain)));
     label2->setJustificationType (Justification::centredLeft);
     label2->setEditable (false, false, false);
     label2->setColour (Label::backgroundColourId, Colour (0x0));

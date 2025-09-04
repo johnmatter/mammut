@@ -83,11 +83,11 @@ Prefs::Prefs ()
     //printf("get: -%d-\n",propertiesfile->getIntValue("tes"));
     //printf("Getting: %d\n",propertiesfile->getBoolValue(soundonoffButton->getButtonText(),true)==true?1:0);
 
-    soundonoffButton->setToggleState(propertiesfile->getBoolValue(soundonoffButton->getButtonText().replaceCharacters(String(" ", true),String("_")),prefs_soundonoff),true);
-    pictureButton->setToggleState(propertiesfile->getBoolValue(pictureButton->getButtonText().replaceCharacters(String(" ", true),String("_")),prefs_picture),true);
-    movingcameraButton->setToggleState(propertiesfile->getBoolValue(movingcameraButton->getButtonText().replaceCharacters(String(" ", true),String("_")),prefs_movingcamera),true);
-    animationButton->setToggleState(propertiesfile->getBoolValue(animationButton->getButtonText().replaceCharacters(String(" ", true),String("_")),prefs_animation),true);
-    loopButton->setToggleState(propertiesfile->getBoolValue(loopButton->getButtonText().replaceCharacters(String(" ", true),String("_")),prefs_loop),true);
+    soundonoffButton->setToggleState(propertiesfile->getBoolValue(soundonoffButton->getButtonText().replaceCharacters(String(" ", true),String("_")),prefs_soundonoff),juce::NotificationType::sendNotification);
+    pictureButton->setToggleState(propertiesfile->getBoolValue(pictureButton->getButtonText().replaceCharacters(String(" ", true),String("_")),prefs_picture),juce::NotificationType::sendNotification);
+    movingcameraButton->setToggleState(propertiesfile->getBoolValue(movingcameraButton->getButtonText().replaceCharacters(String(" ", true),String("_")),prefs_movingcamera),juce::NotificationType::sendNotification);
+    animationButton->setToggleState(propertiesfile->getBoolValue(animationButton->getButtonText().replaceCharacters(String(" ", true),String("_")),prefs_animation),juce::NotificationType::sendNotification);
+    loopButton->setToggleState(propertiesfile->getBoolValue(loopButton->getButtonText().replaceCharacters(String(" ", true),String("_")),prefs_loop),juce::NotificationType::sendNotification);
     //[/Constructor]
 }
 

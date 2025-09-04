@@ -56,7 +56,7 @@ Invert::Invert ()
 
     addAndMakeVisible (label = new Label (("new label"),
                                           ("Inversion block size (0-100%)")));
-    label->setFont (Font (15.0000f, Font::plain));
+    label->setFont (Font (FontOptions (15.0000f, Font::plain)));
     label->setJustificationType (Justification::centredLeft);
     label->setEditable (false, false, false);
     label->setColour (Label::backgroundColourId, Colour (0x0));
@@ -77,7 +77,7 @@ Invert::Invert ()
 
     addAndMakeVisible (label2 = new Label (("new label"),
                                            ("Splits the spectrum into regions with specified size, and turns each of these backwards. If you select a region size of 100%, the entire spectrum will be mirrored around its center. Also, the result is complex conjugated to avoid reversal of the sound.\n\n")));
-    label2->setFont (Font (10.7000f, Font::plain));
+    label2->setFont (Font (FontOptions (10.7000f, Font::plain)));
     label2->setJustificationType (Justification::centredLeft);
     label2->setEditable (false, false, false);
     label2->setColour (Label::backgroundColourId, Colour (0x0));

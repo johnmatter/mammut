@@ -73,7 +73,7 @@ void drawscale(Graphics *g)
     for (i=0; i<=10; i++) {
       grafx = (ch+1)*theheight/samps_per_frame - i*35./samps_per_frame + 10;
       g->drawLine(startx-5,grafx,startx+5,grafx);
-      sprintf(tall, "%2d", i);
+      snprintf(tall, sizeof(tall), "%2d", i);
       g->drawSingleLineText(tall,0,grafx+5);
     }
   }

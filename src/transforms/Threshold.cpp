@@ -57,7 +57,7 @@ Threshold::Threshold ()
 
     addAndMakeVisible (label = new Label (("new label"),
                                           ("Threshold level (0-10)")));
-    label->setFont (Font (15.0000f, Font::plain));
+    label->setFont (Font (FontOptions (15.0000f, Font::plain)));
     label->setJustificationType (Justification::centredLeft);
     label->setEditable (false, false, false);
     label->setColour (Label::backgroundColourId, Colour (0x0));
@@ -82,7 +82,7 @@ Threshold::Threshold ()
 
     addAndMakeVisible (label2 = new Label (("new label"),
                                            ("Removes all partials below a given amplitude threshold.")));
-    label2->setFont (Font (15.0000f, Font::plain));
+    label2->setFont (Font (FontOptions (15.0000f, Font::plain)));
     label2->setJustificationType (Justification::centredLeft);
     label2->setEditable (false, false, false);
     label2->setColour (Label::backgroundColourId, Colour (0x0));
@@ -181,7 +181,7 @@ void Threshold::buttonClicked (Button* buttonThatWasClicked)
     {
         //[UserButtonCode_resetbutton] -- add your button handler code here..
       resetval(threshold,threshold_level);
-      toggleButton->setToggleState(threshold_remove_above_threshold_default, true);
+      toggleButton->setToggleState(threshold_remove_above_threshold_default, juce::NotificationType::sendNotification);
         //[/UserButtonCode_resetbutton]
     }
     else if (buttonThatWasClicked == textButton2)

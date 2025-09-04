@@ -56,7 +56,7 @@ Filter::Filter ()
 
     addAndMakeVisible (label = new Label (("new label"),
                                           ("Lower cutoff (Hz)")));
-    label->setFont (Font (15.0000f, Font::plain));
+    label->setFont (Font (FontOptions (15.0000f, Font::plain)));
     label->setJustificationType (Justification::centredLeft);
     label->setEditable (false, false, false);
     label->setColour (Label::backgroundColourId, Colour (0x0));
@@ -83,7 +83,7 @@ Filter::Filter ()
 
     addAndMakeVisible (label2 = new Label (("new label"),
                                            ("Upper cutoff (Hz)")));
-    label2->setFont (Font (15.0000f, Font::plain));
+    label2->setFont (Font (FontOptions (15.0000f, Font::plain)));
     label2->setJustificationType (Justification::centredLeft);
     label2->setEditable (false, false, false);
     label2->setColour (Label::backgroundColourId, Colour (0x0));
@@ -102,7 +102,7 @@ Filter::Filter ()
 
     addAndMakeVisible (label3 = new Label (("new label"),
                                            ("Sharpness (0-10)")));
-    label3->setFont (Font (15.0000f, Font::plain));
+    label3->setFont (Font (FontOptions (15.0000f, Font::plain)));
     label3->setJustificationType (Justification::centredLeft);
     label3->setEditable (false, false, false);
     label3->setColour (Label::backgroundColourId, Colour (0x0));
@@ -118,7 +118,7 @@ Filter::Filter ()
 
     addAndMakeVisible (label4 = new Label (("new label"),
                                            ("Optimal bandstop filter. The ultimate in cut-off performance!")));
-    label4->setFont (Font (12.4000f, Font::plain));
+    label4->setFont (Font (FontOptions (12.4000f, Font::plain)));
     label4->setJustificationType (Justification::centredLeft);
     label4->setEditable (false, false, false);
     label4->setColour (Label::backgroundColourId, Colour (0x0));

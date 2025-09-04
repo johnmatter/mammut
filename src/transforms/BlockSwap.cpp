@@ -59,7 +59,7 @@ BlockSwap::BlockSwap ()
 
     addAndMakeVisible (label = new Label ("new label",
                                           "Number of swaps"));
-    label->setFont (Font (15.0000f, Font::plain));
+    label->setFont (Font (FontOptions (15.0000f, Font::plain)));
     label->setJustificationType (Justification::centredLeft);
     label->setEditable (false, false, false);
     label->setColour (Label::backgroundColourId, Colour (0x0));
@@ -88,7 +88,7 @@ BlockSwap::BlockSwap ()
 
     addAndMakeVisible (label2 = new Label ("new label",
                                            "Block size (0-100%)"));
-    label2->setFont (Font (15.0000f, Font::plain));
+    label2->setFont (Font (FontOptions (15.0000f, Font::plain)));
     label2->setJustificationType (Justification::centredLeft);
     label2->setEditable (false, false, false);
     label2->setColour (Label::backgroundColourId, Colour (0x0));
@@ -104,7 +104,7 @@ BlockSwap::BlockSwap ()
 
     addAndMakeVisible (label3 = new Label ("new label",
                                            "Selects randomly positioned regions of the spectrum, and interchanges their halves. The Block size parameter sets the size of the blocks, given in percents of the whole frequency axis. This procedure is repeated a number of times, as specified, thus permutating the partials."));
-    label3->setFont (Font (11.2000f, Font::plain));
+    label3->setFont (Font (FontOptions (11.2000f, Font::plain)));
     label3->setJustificationType (Justification::centredLeft);
     label3->setEditable (false, false, false);
     label3->setColour (Label::backgroundColourId, Colour (0x0));
@@ -214,7 +214,7 @@ void BlockSwap::buttonClicked (Button* buttonThatWasClicked)
         //[UserButtonCode_resetbutton] -- add your button handler code here..
       resetval(blockswap,number_of_swaps);
       resetval(blockswap,block_size);
-      toggleButton->setToggleState(blockswap_old_version_with_error, true);
+      toggleButton->setToggleState(blockswap_old_version_with_error, juce::NotificationType::sendNotification);
         //[/UserButtonCode_resetbutton]
     }
     else if (buttonThatWasClicked == textButton2)

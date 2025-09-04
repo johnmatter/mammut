@@ -56,7 +56,7 @@ Gain::Gain ()
 
     addAndMakeVisible (label = new Label ("new label",
                                           "Amplitude multiplier (0-100)"));
-    label->setFont (Font (15.0000f, Font::plain));
+    label->setFont (Font (FontOptions (15.0000f, Font::plain)));
     label->setJustificationType (Justification::centredLeft);
     label->setEditable (false, false, false);
     label->setColour (Label::backgroundColourId, Colour (0x0));
@@ -77,7 +77,7 @@ Gain::Gain ()
 
     addAndMakeVisible (label2 = new Label ("new label",
                                            "A highly useful function, because many of the transforms will change the gain and the spectrum may have to be re-scaled manually. (An alternative is to use the \"normalize\" button)"));
-    label2->setFont (Font (15.0000f, Font::plain));
+    label2->setFont (Font (FontOptions (15.0000f, Font::plain)));
     label2->setJustificationType (Justification::centredLeft);
     label2->setEditable (false, false, false);
     label2->setColour (Label::backgroundColourId, Colour (0x0));

@@ -66,7 +66,7 @@ Stereo::Stereo ()
 
     addAndMakeVisible (label = new Label ("new label",
                                           "Switching Probability for Crossover"));
-    label->setFont (Font (15.0000f, Font::plain));
+    label->setFont (Font (FontOptions (15.0000f, Font::plain)));
     label->setJustificationType (Justification::centredLeft);
     label->setEditable (false, false, false);
     label->setColour (Label::backgroundColourId, Colour (0x0));
@@ -85,7 +85,7 @@ Stereo::Stereo ()
 
     addAndMakeVisible (label2 = new Label ("new label",
                                            "(Stereo files only)"));
-    label2->setFont (Font (11.2000f, Font::plain));
+    label2->setFont (Font (FontOptions (11.2000f, Font::plain)));
     label2->setJustificationType (Justification::centredLeft);
     label2->setEditable (false, false, false);
     label2->setColour (Label::backgroundColourId, Colour (0x0));

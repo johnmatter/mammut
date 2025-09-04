@@ -52,7 +52,7 @@ Mirror::Mirror ()
 
     addAndMakeVisible (description = new Label ("new label",
                                                 "Reflects the whole spectrum around the frequency you specify. "));
-    description->setFont (Font (15.0000f, Font::plain));
+    description->setFont (Font (FontOptions (15.0000f, Font::plain)));
     description->setJustificationType (Justification::centredLeft);
     description->setEditable (false, false, false);
     description->setColour (Label::backgroundColourId, Colour (0x0));
@@ -72,7 +72,7 @@ Mirror::Mirror ()
 
     addAndMakeVisible (label = new Label ("new label",
                                           "Mirror frequency (Hz)"));
-    label->setFont (Font (15.0000f, Font::plain));
+    label->setFont (Font (FontOptions (15.0000f, Font::plain)));
     label->setJustificationType (Justification::centredLeft);
     label->setEditable (false, false, false);
     label->setColour (Label::backgroundColourId, Colour (0x0));

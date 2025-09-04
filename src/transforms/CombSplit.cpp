@@ -53,7 +53,7 @@ CombSplit::CombSplit ()
 
     addAndMakeVisible (label = new Label ("new label",
                                           "Block size (# of bins)"));
-    label->setFont (Font (15.0000f, Font::plain));
+    label->setFont (Font (FontOptions (15.0000f, Font::plain)));
     label->setJustificationType (Justification::centredLeft);
     label->setEditable (false, false, false);
     label->setColour (Label::backgroundColourId, Colour (0x0));
@@ -80,7 +80,7 @@ CombSplit::CombSplit ()
 
     addAndMakeVisible (label2 = new Label ("new label",
                                            "Number of files"));
-    label2->setFont (Font (15.0000f, Font::plain));
+    label2->setFont (Font (FontOptions (15.0000f, Font::plain)));
     label2->setJustificationType (Justification::centredLeft);
     label2->setEditable (false, false, false);
     label2->setColour (Label::backgroundColourId, Colour (0x0));

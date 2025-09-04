@@ -214,7 +214,7 @@ struct TempFile *TF_new(char *firstname){
 
   tf->next=tempfiles;
   tf->name=(char*)erroralloc(strlen(temp)+1);
-  sprintf(tf->name,"%s",temp);
+  snprintf(tf->name, strlen(temp)+1, "%s", temp);
 
   tempfiles=tf;
 

@@ -13,7 +13,7 @@ void printerror(const char *fmt, ...){
   
   va_start(argp,fmt);
   
-  vsprintf(temp,fmt,argp);
+  vsnprintf(temp, sizeof(temp), fmt, argp);
   fprintf(stderr,"Mammut, error: %s\n",temp);
 
   AlertWindow::showOkCancelBox (AlertWindow::WarningIcon,

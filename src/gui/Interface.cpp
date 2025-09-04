@@ -188,7 +188,7 @@ Interface::Interface (DocumentWindow *mainwindow, const String& commandLine)
 
     addAndMakeVisible (label = new Label (("new label"),
                                           ("Duration Doubling")));
-    label->setFont (Font (15.0000f, Font::plain));
+    label->setFont (Font (FontOptions (15.0000f, Font::plain)));
     label->setJustificationType (Justification::centredLeft);
     label->setEditable (false, false, false);
     label->setColour (Label::backgroundColourId, Colour (0x0));
@@ -304,7 +304,7 @@ Interface::Interface (DocumentWindow *mainwindow, const String& commandLine)
 
     addAndMakeVisible (infotext = new Label (("infotext"),
                                              ("Start by loading and analyzing a soundfile")));
-    infotext->setFont (Font (55.9000f, Font::plain));
+    infotext->setFont (Font (FontOptions (55.9000f, Font::plain)));
     infotext->setJustificationType (Justification::centredLeft);
     infotext->setEditable (false, false, false);
     infotext->setColour (Label::backgroundColourId, Colour (0x0));
@@ -396,7 +396,7 @@ Interface::Interface (DocumentWindow *mainwindow, const String& commandLine)
     abbutton->setRadioGroupId (23456);
     phaseampbutton->setRadioGroupId (23456);
 
-    convolvebutton->setToggleState(true, true);
+    convolvebutton->setToggleState(true, juce::NotificationType::sendNotification);
 
     filewasjustsaved=false;
 
@@ -486,7 +486,7 @@ void Interface::paint (Graphics& g)
     g.fillAll (Colour (0xffddf1ee));
 
     g.setColour (Colours::black);
-    g.setFont (Font (15.0000f, Font::plain));
+    g.setFont (Font (FontOptions (15.0000f, Font::plain)));
     g.drawText (String(),
                 408, 312, 200, 30,
                 Justification::centred, true);
@@ -927,7 +927,7 @@ void Interface::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
 
       if(lastvalid==NULL){
 	lastvalid=(char*)erroralloc(1024);
-	sprintf(lastvalid,"%s","");
+	snprintf(lastvalid, 1024, "%s", "");
       }
 
       //printf("Gakk! %s %d\n",loadcomboBox->getText().toRawUTF8(),loadcomboBox->getSelectedId());
@@ -945,7 +945,7 @@ void Interface::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
       if(loadcomboBox->getSelectedId()==0)
 	loadcomboBox->addItem(loadcomboBox->getText(),loadcomboBox->getNumItems()+1);
 
-      sprintf(lastvalid,"%s", loadcomboBox->getText().toRawUTF8());
+      snprintf(lastvalid, 1024, "%s", loadcomboBox->getText().toRawUTF8());
 
         //[/UserComboBoxCode_loadcomboBox]
     }
@@ -956,7 +956,7 @@ void Interface::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
 
       if(lastvalid==NULL){
 	lastvalid=(char*)erroralloc(1024);
-	sprintf(lastvalid,"%s","");
+	snprintf(lastvalid, 1024, "%s", "");
       }
       
       //printf("Gakk! %s %d\n",loadmulcomboBox->getText().toRawUTF8(),loadmulcomboBox->getSelectedId());
@@ -976,7 +976,7 @@ void Interface::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
       if(loadmulcomboBox->getSelectedId()==0)
 	loadmulcomboBox->addItem(loadmulcomboBox->getText(),loadmulcomboBox->getNumItems()+1);
 
-      sprintf(lastvalid,"%s", loadmulcomboBox->getText().toRawUTF8());
+      snprintf(lastvalid, 1024, "%s", loadmulcomboBox->getText().toRawUTF8());
 
         //[/UserComboBoxCode_loadmulcomboBox]
     }
