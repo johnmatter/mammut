@@ -190,7 +190,8 @@ public:
   }
   
   void initJuceAudio(void){
-    XmlElement *settings=propertiesfile->getXmlValue("audiodevicemanager").get();
+    auto settingsXml = propertiesfile->getXmlValue("audiodevicemanager");
+    XmlElement *settings = settingsXml.get();
     const String error (audioDeviceManager.initialise (0, /* number of input channels */
 						       8, /* number of output channels */
 						       settings,
