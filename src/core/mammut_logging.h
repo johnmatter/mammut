@@ -1,6 +1,24 @@
 #ifndef MAMMUT_LOGGING_H
 #define MAMMUT_LOGGING_H
 
+/**
+ *   MAMMUT_LOG_DEBUG("Processing audio buffer");
+ *   MAMMUT_LOG_ERROR("Audio device not found!");
+ *   MAMMUT_LOG_INFO("Sample rate: %f Hz", 48000.0f);
+ * 
+ *   - ~microsecond timestamps
+ *   - Colored output (ERROR=red, WARN=yellow, INFO=green, DEBUG=cyan)
+ *   - File/line/function information
+ *   - Compile-time config
+ *   - Conditional logging macros
+ * 
+ * Compile-time options:
+ *   #define MAMMUT_LOG_ENABLED 0        // Disable all logging
+ *   #define MAMMUT_LOG_COLOR_ENABLED 0  // Disable colors
+ *   #define MAMMUT_LOG_TIMESTAMP_ENABLED 0  // Disable timestamps
+ *   #define MAMMUT_LOG_FILE_INFO_ENABLED 0  // Disable file/line info
+ */
+
 #include <stdio.h>
 #include <stdarg.h>
 #include <time.h>
