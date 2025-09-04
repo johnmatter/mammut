@@ -143,7 +143,7 @@ void TF_cleanup(void){
 }
 
 void TF_cleanup_exit(void){
-  fprintf(stderr,"Cleaning up.\n");
+  MAMMUT_LOG_DEBUG("Cleaning up.");
   TF_cleanup();
 }
 

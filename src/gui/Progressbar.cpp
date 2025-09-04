@@ -17,7 +17,7 @@ public:
   {
   }
   
-  void run()
+  void run() override
   {
     //setPriority(0);
     isprocessing=true;
@@ -33,7 +33,7 @@ private:
 static MyTask *mytask=NULL;
 
 static void create_new_mytask(){
-  fprintf(stderr,"mytask: %p\n",mytask);
+  MAMMUT_LOG_DEBUG("mytask: %p", mytask);
 
   if(mytask!=NULL)
     delete mytask;
@@ -80,7 +80,7 @@ public:
 		int *das_valtocheck,
 		int das_maxvalue)
   {
-    printf("I am started! %d, %d, %d\n",das_minvalue,*das_valtocheck,das_maxvalue);
+    MAMMUT_LOG_DEBUG("I am started! %d, %d, %d", das_minvalue, *das_valtocheck, das_maxvalue);
     minvalue=das_minvalue;
     valtocheck=das_valtocheck;
     maxvalue=das_maxvalue;
@@ -155,7 +155,7 @@ void GUI_newprocess(void das_func(void)){
   mytask->setProgress(0.0);
 
   func=das_func;
-  mytask->run();
+  mytask->launchThread();
 }
 
 
@@ -174,7 +174,7 @@ void Transformit(void das_func(void)){
   func=das_func;  
 
   //cs->enter();
-  mytask->run();
+  mytask->launchThread();
   //cs->exit();
 
   RedrawWin();
@@ -197,7 +197,7 @@ void ReTransformit(void das_func(void)){
   //GUI_addUndo();
 
   func=das_func;  
-  mytask->run();
+  mytask->launchThread();
 
   RedrawWin();
 

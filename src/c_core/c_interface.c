@@ -7,6 +7,7 @@
 
 #include "mammut.h"
 #include "undo.h"
+#include "mammut_logging.h"
 //#include "interface.h"
 #include "tempfile.h"
 
@@ -91,12 +92,16 @@ char *MC_synthAndSave(char *filename){
 }
 
 void MC_play(void){
+  MAMMUT_LOG_DEBUG("MC_play() called");
   juceplay_start();
+  MAMMUT_LOG_DEBUG("juceplay_start() returned");
   //Play();
 }
 
 void MC_stop(void){
+  MAMMUT_LOG_DEBUG("MC_stop() called");
   juceplay_stop();
+  MAMMUT_LOG_DEBUG("juceplay_stop() returned");
   //PlayStopHard();
 }
 

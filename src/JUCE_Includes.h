@@ -16,5 +16,8 @@
 // Standard library includes
 #include <memory>
 
+// Mammut logging system
+#include "core/mammut_logging.h"
+
 // Common JUCE types
 using namespace juce;

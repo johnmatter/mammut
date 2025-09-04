@@ -622,7 +622,9 @@ void Interface::buttonClicked (Button* buttonThatWasClicked)
     if (buttonThatWasClicked == stopbutton)
     {
         //[UserButtonCode_stopbutton] -- add your button handler code here..
+      MAMMUT_LOG_DEBUG("Stop button clicked!");
       MC_stop();
+      MAMMUT_LOG_DEBUG("MC_stop() returned");
         //[/UserButtonCode_stopbutton]
     }
     else if (buttonThatWasClicked == correlatebutton)
@@ -670,41 +672,43 @@ void Interface::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == playbutton)
     {
         //[UserButtonCode_playbutton] -- add your button handler code here..
+      MAMMUT_LOG_DEBUG("Play button clicked!");
       MC_play();
+      MAMMUT_LOG_DEBUG("MC_play() returned");
         //[/UserButtonCode_playbutton]
     }
     else if (buttonThatWasClicked == loadbrowse)
     {
         //[UserButtonCode_loadbrowse] -- add your button handler code here..
-      printf("DEBUG: loadbrowse button clicked!\n");
+      MAMMUT_LOG_DEBUG("loadbrowse button clicked!");
       
       isprocessing=true;
-      printf("DEBUG: Creating FileChooser...\n");
+      MAMMUT_LOG_DEBUG("Creating FileChooser...");
       
       // Use member variable to keep FileChooser alive during async operation
       loadFileChooser = std::make_unique<FileChooser>("Please choose file to load and analyze...",
 			     File::getSpecialLocation(File::userHomeDirectory),
 			     "*.wav;*.aiff;*.flac;*.ogg;*.mp3");
 
-      printf("DEBUG: About to launch FileChooser...\n");
+      MAMMUT_LOG_DEBUG("About to launch FileChooser...");
       
       // Use launchAsync with the member variable
       loadFileChooser->launchAsync(FileBrowserComponent::openMode | FileBrowserComponent::canSelectFiles,
         [this](const FileChooser& chooser) {
-          printf("DEBUG: FileChooser callback executed!\n");
+          MAMMUT_LOG_DEBUG("FileChooser callback executed!");
           if (chooser.getResult() != File{}) {
             File mooseFile = chooser.getResult();
             filename = (char*)mooseFile.getFullPathName().toRawUTF8();
             printf("Filename2: %s\n", filename);
             loadcomboBox->setText(mooseFile.getFullPathName());
           } else {
-            printf("DEBUG: No file selected\n");
+            MAMMUT_LOG_DEBUG("No file selected");
           }
           isprocessing = false;
           // Clear the FileChooser after use
           loadFileChooser.reset();
         });
-      printf("DEBUG: FileChooser launchAsync called\n");
+      MAMMUT_LOG_DEBUG("FileChooser launchAsync called");
 
         //[/UserButtonCode_loadbrowse]
     }
@@ -923,7 +927,7 @@ void Interface::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
         //[UserComboBoxCode_loadcomboBox] -- add your combo box handling code here..
       static char *lastvalid=NULL;
 
-      fprintf(stderr,"Agakk gakk0!\n");
+      MAMMUT_LOG_DEBUG("Agakk gakk0!");
 
       if(lastvalid==NULL){
 	lastvalid=(char*)erroralloc(1024);
@@ -931,15 +935,15 @@ void Interface::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
       }
 
       //printf("Gakk! %s %d\n",loadcomboBox->getText().toRawUTF8(),loadcomboBox->getSelectedId());
-      fprintf(stderr,"gakk gakk1!\n");
+      MAMMUT_LOG_DEBUG("gakk gakk1!");
       if(filewasjustsaved==false && loadFile((char*)loadcomboBox->getText().toRawUTF8())==false){
 	savefilename=NULL;
-	fprintf(stderr,"gakk gakk2!\n");
+	MAMMUT_LOG_DEBUG("gakk gakk2!");
 	if(strcmp("",lastvalid))
 	  loadcomboBox->setText(lastvalid);
 	return;
       }
-      fprintf(stderr,"gakk gakk3!\n");
+      MAMMUT_LOG_DEBUG("gakk gakk3!");
       filewasjustsaved=false;
 
       if(loadcomboBox->getSelectedId()==0)

@@ -118,12 +118,12 @@ static char *das_ret;
 
 void das_das_load_and_multiply_ok(void){
   das_ret=das_load_and_multiply_ok(das_filename);
+  RedrawWin();
 }
 
 char *load_and_multiply_ok(char *filename){
   das_filename=filename;
   GUI_newprocess(das_das_load_and_multiply_ok);
-  RedrawWin();
   return das_ret;
 }
 

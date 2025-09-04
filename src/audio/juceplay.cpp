@@ -104,7 +104,7 @@ static int oggclose_func (void *datasource){
 }
 
 static long oggtell_func  (void *datasource){
-  fprintf(stderr,"oggtell\n");
+  MAMMUT_LOG_DEBUG("oggtell");
   return oggpos;
 }
 
@@ -114,16 +114,19 @@ bool jp_isplaying=false;
 static float normalize_val;
 
 static void source_init(void){
+  MAMMUT_LOG_DEBUG("source_init() called");
   //int progval=0;
 
   memcpy(lyd2,lyd,samps_per_frame*N*sizeof(float));
   
   for (int ch=0; ch<samps_per_frame; ch++) {
+    MAMMUT_LOG_DEBUG("source_init() - processing channel %d/%d", ch, samps_per_frame);
     GUI_aboveprogressbar(ch,samps_per_frame); 
     rfft(lyd+ch*N,  N/2,  INVERSE);
   }
   
   normalize_val=get_normalize_val();
+  MAMMUT_LOG_DEBUG("source_init() finished");
   //fprintf(stderr,"source_init finished\n");
   //if(synthandsave_normalize_gain)
   //  normalize();
@@ -180,7 +183,7 @@ public:
   }
 
   void changeListenerCallback(ChangeBroadcaster *source) override {
-    printf("Some audio change thing.\n");
+    MAMMUT_LOG_DEBUG("Some audio change thing.");
     if(audioDeviceManager.getCurrentAudioDevice()!=NULL){
       samplerate=audioDeviceManager.getCurrentAudioDevice()->getCurrentSampleRate();
       propertiesfile->setValue("audiodevicemanager",audioDeviceManager.createStateXml().get());
@@ -370,6 +373,13 @@ public:
 			     int 	numSamples
 			     )
   {
+    static int callback_count = 0;
+    callback_count++;
+    
+    if(callback_count <= 10 || callback_count % 1000 == 0) { // Log first 10 callbacks, then every 1000th
+      MAMMUT_LOG_DEBUG("Audio callback #%d, pleasestop=%d, isreadingdata=%d, numSamples=%d", 
+             callback_count, pleasestop, isreadingdata, numSamples);
+    }
 
     // First find the real number of totalNumOutputChannels.
     {
@@ -396,8 +406,10 @@ public:
     if(num_channels>totalNumOutputChannels)
       num_channels=totalNumOutputChannels;
 
-    if(pleasestop==true)
+    if(pleasestop==true){
+      MAMMUT_LOG_DEBUG("Audio callback - pleasestop=true, setting isreadingdata=false");
       isreadingdata=false;
+    }
 
     if(isreadingdata==false){
       for(int ch=0;ch<totalNumOutputChannels;ch++){
@@ -430,17 +442,25 @@ public:
 
 
   void play(){
+    MAMMUT_LOG_DEBUG("JucePlayer::play() called");
     int num_channels=getSourceNumChannels();
 
-    if(isinitialized==false || num_channels==0)
+    if(isinitialized==false || num_channels==0){
+      MAMMUT_LOG_DEBUG("JucePlayer::play() - not initialized or no channels");
       return;
+    }
 
-    if(isusingjack==false && audioDeviceManager.getCurrentAudioDevice()==NULL)
+    if(isusingjack==false && audioDeviceManager.getCurrentAudioDevice()==NULL){
+      MAMMUT_LOG_DEBUG("JucePlayer::play() - no audio device");
       return;
+    }
 
+    MAMMUT_LOG_DEBUG("JucePlayer::play() - calling stop()");
     stop();
 
+    MAMMUT_LOG_DEBUG("JucePlayer::play() - calling GUI_newprocess(source_init)");
     GUI_newprocess(source_init);
+    MAMMUT_LOG_DEBUG("JucePlayer::play() - GUI_newprocess(source_init) returned");
     //source_init();
     //fprintf(stderr,"GUI_newprocess finished\n");
 
@@ -480,24 +500,52 @@ public:
     mustrunonemore=false;
     jp_isplaying=true;
     isreadingdata=true;
+    
+    // Start the audio device if not using JACK
+    if(isusingjack==false){
+      MAMMUT_LOG_DEBUG("Starting audio device");
+      if(auto* device = audioDeviceManager.getCurrentAudioDevice()){
+        MAMMUT_LOG_DEBUG("Audio device found: %s", device->getName().toUTF8().getAddress());
+        MAMMUT_LOG_DEBUG("Sample rate: %f, Buffer size: %d", device->getCurrentSampleRate(), device->getCurrentBufferSizeSamples());
+        device->start(this);
+        MAMMUT_LOG_DEBUG("Audio device started, isPlaying: %d", device->isPlaying());
+      } else {
+        MAMMUT_LOG_ERROR("No audio device found!");
+      }
+    }
   }
 
   void stop(){
+    MAMMUT_LOG_DEBUG("JucePlayer::stop() called");
     isplaying_ogg=false;
 
-    if(isinitialized==false)
+    if(isinitialized==false){
+      MAMMUT_LOG_DEBUG("JucePlayer::stop() - not initialized");
       return;
-    if(jp_isplaying==false)
+    }
+    if(jp_isplaying==false){
+      MAMMUT_LOG_DEBUG("JucePlayer::stop() - not playing");
       return;
+    }
     if(isreadingdata==true){
+      MAMMUT_LOG_DEBUG("JucePlayer::stop() - setting pleasestop=true, letting audio callback handle cleanup");
       pleasestop=true;
-      while(isreadingdata==true)
-	Time::waitForMillisecondCounter(Time::getApproximateMillisecondCounter()+100);
+      // Don't wait - let the audio callback handle the cleanup asynchronously
     }
 
+    MAMMUT_LOG_DEBUG("JucePlayer::stop() - calling sourceCleanup()");
     sourceCleanup();
 
+    // Stop the audio device if not using JACK
+    if(isusingjack==false){
+      MAMMUT_LOG_DEBUG("Stopping audio device");
+      if(auto* device = audioDeviceManager.getCurrentAudioDevice()){
+        device->stop();
+      }
+    }
+
     jp_isplaying=false;
+    MAMMUT_LOG_DEBUG("JucePlayer::stop() finished");
   }
 
   void prefs(){
@@ -528,7 +576,7 @@ public:
   void audioDeviceAboutToStart (AudioIODevice *device) override
   {
     double sampleRate = device->getCurrentSampleRate ();
-    printf("Samplerate set to %f\n",(float)sampleRate);
+    MAMMUT_LOG_DEBUG("Samplerate set to %f", (float)sampleRate);
     samplerate=sampleRate;
     return;
   }
@@ -585,11 +633,15 @@ void juceplay_init(PropertiesFile *propertiesfile){
 }
 
 void juceplay_start(){
+  MAMMUT_LOG_DEBUG("juceplay_start() called");
   jp->play();
+  MAMMUT_LOG_DEBUG("jp->play() returned");
 }
 
 void juceplay_stop(){
+  MAMMUT_LOG_DEBUG("juceplay_stop() called");
   jp->stop();
+  MAMMUT_LOG_DEBUG("jp->stop() returned");
 }
 
 void juceplay_prefs(){

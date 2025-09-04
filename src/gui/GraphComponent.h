@@ -59,7 +59,7 @@ public:
   //==============================================================================
   void resized ()
   {
-    printf("gakk gakk\n");
+    MAMMUT_LOG_DEBUG("gakk gakk");
   }
   
 

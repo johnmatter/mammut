@@ -135,12 +135,12 @@ static void DrawImage(void){
   start=(zoom==0?0:1000.*leftkc*N/g_samplerate);
   range=N/(zoom?20:2); if (start+range>=N/2) range=N/2-start-1;
 
-  printf("I am drawing\n");
+  MAMMUT_LOG_DEBUG("I am drawing");
   
   for (ch=0; ch<samps_per_frame; ch++) {
     for (i=0; i<range; i++) {
       grafx = (int)(i*800./(N/(zoom?20.:2.)))+STARTX+10;
-      real=lyd[(i+start)*2+ch*N]; imag=lyd[(i+start)*2+1+ch*N];
+      real=lyd[ch*N+(i+start)*2]; imag=lyd[ch*N+(i+start)*2+1];
       amp=sqrt(real*real+imag*imag)*N;
       if (amp>maxamp) maxamp=amp;
       if (grafx!=grafold) {
@@ -180,5 +180,5 @@ void GUI_init(GraphComponent *das_graphcomponent,Interface *das_interface){
   interface=das_interface;
   image=Image(Image::ARGB,das_graphcomponent->getWidth(),das_graphcomponent->getHeight(),false);
   RedrawWin();
-  printf("GUI_init()\n");
+  MAMMUT_LOG_DEBUG("GUI_init()");
 }

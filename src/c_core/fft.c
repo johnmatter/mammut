@@ -1,5 +1,6 @@
 
 #include "mammut.h"
+#include "mammut_logging.h"
 
 
 
@@ -114,7 +115,7 @@ static void cfft(float x[], int NC, int forward)
 
     bitreverse( x, ND );
 
-    printf("About top do something\n");
+    MAMMUT_LOG_DEBUG("About top do something");
     for ( mmax = 2; mmax < ND; mmax = delta ) {
       //        XtVaSetValues(progressScale, XmNvalue, 100*mmax/ND, NULL);
       *progval=log(mmax*2)*100;

@@ -1,5 +1,6 @@
 
 #include "mammut.h"
+#include "mammut_logging.h"
 
 
 /* Following code copied from Ceres. */
@@ -99,7 +100,7 @@ static char *das_loadana(char *filename)
   sf_close(infile);
 
   for (ch=0; ch<samps_per_frame; ch++) {
-    printf("CH: %d/%d\n",ch,samps_per_frame);
+    MAMMUT_LOG_DEBUG("CH: %d/%d", ch, samps_per_frame);
     GUI_aboveprogressbar(ch,samps_per_frame);
     rfft(lyd+ch*N,  N/2,  FORWARD);
   }
@@ -116,12 +117,12 @@ static char *das_ret;
 
 void das_das_loadana(void){
   das_ret=das_loadana(das_filename);
+  RedrawWin();
 }
 
 char *loadana(char *filename){
   das_filename=filename;
   GUI_newprocess(das_das_loadana);
-  RedrawWin();
   return das_ret;
 }
 
