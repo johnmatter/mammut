@@ -21,6 +21,7 @@
 
 //[Headers]     -- You can add your own extra header files here --
 #include "JUCE_Includes.h"
+#include <memory>
 //[/Headers]
 
 
@@ -58,12 +59,12 @@ private:
     //[/UserVariables]
 
     //==============================================================================
-    ScopedPointer<ToggleButton> soundonoffButton;
-    ScopedPointer<ToggleButton> movingcameraButton;
-    ScopedPointer<ToggleButton> animationButton;
-    ScopedPointer<ToggleButton> pictureButton;
-    ScopedPointer<ToggleButton> loopButton;
-    ScopedPointer<TextButton> audioSettingsButton;
+    std::unique_ptr<ToggleButton> soundonoffButton;
+    std::unique_ptr<ToggleButton> movingcameraButton;
+    std::unique_ptr<ToggleButton> animationButton;
+    std::unique_ptr<ToggleButton> pictureButton;
+    std::unique_ptr<ToggleButton> loopButton;
+    std::unique_ptr<TextButton> audioSettingsButton;
 
 
     //==============================================================================

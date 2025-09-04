@@ -35,31 +35,37 @@ Prefs::Prefs ()
     //[Constructor_pre] You can add your own custom stuff here..
     //[/Constructor_pre]
 
-    addAndMakeVisible (soundonoffButton = new ToggleButton ("new toggle button"));
+    soundonoffButton = std::make_unique<ToggleButton>("new toggle button");
+    addAndMakeVisible (soundonoffButton.get());
     soundonoffButton->setButtonText (TRANS("Startup Sound"));
     soundonoffButton->addListener (this);
 
-    addAndMakeVisible (movingcameraButton = new ToggleButton ("new toggle button"));
+    movingcameraButton = std::make_unique<ToggleButton>("new toggle button");
+    addAndMakeVisible (movingcameraButton.get());
     movingcameraButton->setButtonText (TRANS("Moving Camera"));
     movingcameraButton->addListener (this);
     movingcameraButton->setToggleState (true, dontSendNotification);
 
-    addAndMakeVisible (animationButton = new ToggleButton ("new toggle button"));
+    animationButton = std::make_unique<ToggleButton>("new toggle button");
+    addAndMakeVisible (animationButton.get());
     animationButton->setButtonText (TRANS("Animation"));
     animationButton->addListener (this);
     animationButton->setToggleState (true, dontSendNotification);
 
-    addAndMakeVisible (pictureButton = new ToggleButton ("new toggle button"));
+    pictureButton = std::make_unique<ToggleButton>("new toggle button");
+    addAndMakeVisible (pictureButton.get());
     pictureButton->setButtonText (TRANS("Background Picture"));
     pictureButton->addListener (this);
     pictureButton->setToggleState (true, dontSendNotification);
 
-    addAndMakeVisible (loopButton = new ToggleButton ("new toggle button"));
+    loopButton = std::make_unique<ToggleButton>("new toggle button");
+    addAndMakeVisible (loopButton.get());
     loopButton->setButtonText (TRANS("Loop playing"));
     loopButton->addListener (this);
     loopButton->setToggleState (true, dontSendNotification);
 
-    addAndMakeVisible (audioSettingsButton = new TextButton ("new button"));
+    audioSettingsButton = std::make_unique<TextButton>("new button");
+    addAndMakeVisible (audioSettingsButton.get());
     audioSettingsButton->setButtonText (TRANS("Audio Settings"));
     audioSettingsButton->addListener (this);
     audioSettingsButton->setColour (TextButton::buttonColourId, Colour (0x21bbbbff));
@@ -96,13 +102,7 @@ Prefs::~Prefs()
     //[Destructor_pre]. You can add your own custom destruction code here..
     //[/Destructor_pre]
 
-    soundonoffButton = nullptr;
-    movingcameraButton = nullptr;
-    animationButton = nullptr;
-    pictureButton = nullptr;
-    loopButton = nullptr;
-    audioSettingsButton = nullptr;
-
+    // std::unique_ptr automatically handles cleanup, no need for explicit nullptr assignments
 
     //[Destructor]. You can add your own custom destruction code here..
     //[/Destructor]
@@ -140,7 +140,7 @@ void Prefs::buttonClicked (Button* buttonThatWasClicked)
     //[UserbuttonClicked_Pre]
     //[/UserbuttonClicked_Pre]
 
-    if (buttonThatWasClicked == soundonoffButton)
+    if (buttonThatWasClicked == soundonoffButton.get())
     {
         //[UserButtonCode_soundonoffButton] -- add your button handler code here..
       prefs_soundonoff=buttonThatWasClicked->getToggleState();
@@ -149,7 +149,7 @@ void Prefs::buttonClicked (Button* buttonThatWasClicked)
       propertiesfile->save();
         //[/UserButtonCode_soundonoffButton]
     }
-    else if (buttonThatWasClicked == movingcameraButton)
+    else if (buttonThatWasClicked == movingcameraButton.get())
     {
         //[UserButtonCode_movingcameraButton] -- add your button handler code here..
       prefs_movingcamera=buttonThatWasClicked->getToggleState();
@@ -158,7 +158,7 @@ void Prefs::buttonClicked (Button* buttonThatWasClicked)
       propertiesfile->save();
         //[/UserButtonCode_movingcameraButton]
     }
-    else if (buttonThatWasClicked == animationButton)
+    else if (buttonThatWasClicked == animationButton.get())
     {
         //[UserButtonCode_animationButton] -- add your button handler code here..
       prefs_animation=buttonThatWasClicked->getToggleState();
@@ -167,7 +167,7 @@ void Prefs::buttonClicked (Button* buttonThatWasClicked)
       propertiesfile->save();
         //[/UserButtonCode_animationButton]
     }
-    else if (buttonThatWasClicked == pictureButton)
+    else if (buttonThatWasClicked == pictureButton.get())
     {
         //[UserButtonCode_pictureButton] -- add your button handler code here..
       prefs_picture=buttonThatWasClicked->getToggleState();
@@ -183,7 +183,7 @@ void Prefs::buttonClicked (Button* buttonThatWasClicked)
       propertiesfile->save();
         //[/UserButtonCode_pictureButton]
     }
-    else if (buttonThatWasClicked == loopButton)
+    else if (buttonThatWasClicked == loopButton.get())
     {
         //[UserButtonCode_loopButton] -- add your button handler code here..
       prefs_loop=buttonThatWasClicked->getToggleState();
@@ -191,7 +191,7 @@ void Prefs::buttonClicked (Button* buttonThatWasClicked)
       propertiesfile->save();
         //[/UserButtonCode_loopButton]
     }
-    else if (buttonThatWasClicked == audioSettingsButton)
+    else if (buttonThatWasClicked == audioSettingsButton.get())
     {
         //[UserButtonCode_audioSettingsButton] -- add your button handler code here..
       juceplay_prefs();
